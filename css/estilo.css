@@ -1,0 +1,39 @@
+.marcador{
+	background: #fe9d9d;
+	border: 1px solid #f94646;
+}
+.marcador2{
+	background: #5bf946;
+	border: 1px solid #36ae26;
+}
+ h2 {
+  text-align: center;
+  font-style:oblique;
+  font-size: 30px;
+ font-family:Arial Black ; 
+}
+a{
+font-style:oblique;
+font-family:Arial Black ; 
+}
+h1{
+
+ font-style:oblique;
+ font-size: 30px;
+ font-family:Arial Black ; 
+
+}
+img.ca-ie {filter: alpha(opacity=65);}
+
+img.ca {
+	opacity:0.65;
+	-moz-opacity: 0.65;
+	filter: alpha(opacity=65);
+	}
+
+
+ h3 {
+  font-style:oblique;
+  font-size: 30px;
+ font-family:Arial Black ; 
+}
