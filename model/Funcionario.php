@@ -1,6 +1,8 @@
 <?php
 
-class Funcionario extends Pessoa
-{
+class Funcionario extends Pessoa{
+	
     
 }
+
+?>
