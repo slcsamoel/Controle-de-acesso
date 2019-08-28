@@ -2,11 +2,11 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-CREATE SCHEMA IF NOT EXISTS `controle_acesso` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
-USE `controle_acesso` ;
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `controle_acesso`.`tb_condominio`
+-- Table `mydb`.`tb_condominio`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`tb_condominio` (
   `id_cond` INT NOT NULL AUTO_INCREMENT ,
