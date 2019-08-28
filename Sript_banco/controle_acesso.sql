@@ -149,7 +149,6 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `mydb`.`tb_morador` (
   `id_morador` INT NOT NULL ,
   `nome_morador` VARCHAR(100) NOT NULL ,
-  `cpf_morador` VARCHAR(11) NOT NULL ,
   `rg_morador` INT NOT NULL ,
   `dt_nacimento` DATE NOT NULL ,
   `dt_cadastro` DATETIME NOT NULL ,
@@ -163,7 +162,6 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`tb_morador` (
   INDEX `fk_tb_morador_tb_status_morador1_idx` (`tb_status_morador_id_status_morador` ASC) ,
   INDEX `fk_tb_morador_tb_veiculos1_idx` (`tb_veiculos_placa` ASC) ,
   INDEX `fk_tb_morador_usuario1_idx` (`usuario_id_usuario` ASC) ,
-  INDEX `fk_tb_morador_tb_morador1_idx` (`cpf_morador` ASC) ,
   CONSTRAINT `fk_tb_morador_tb_status_morador1`
     FOREIGN KEY (`tb_status_morador_id_status_morador` )
     REFERENCES `mydb`.`tb_status_morador` (`id_status_morador` )
@@ -177,11 +175,6 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`tb_morador` (
   CONSTRAINT `fk_tb_morador_usuario1`
     FOREIGN KEY (`usuario_id_usuario` )
     REFERENCES `mydb`.`usuario` (`id_usuario` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_morador_tb_morador1`
-    FOREIGN KEY (`cpf_morador` )
-    REFERENCES `mydb`.`tb_morador` (`tb_tipo_morador_id_tipo_morador` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
