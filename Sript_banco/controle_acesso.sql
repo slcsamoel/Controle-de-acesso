@@ -96,6 +96,24 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `mydb`.`tb_apartamento`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mydb`.`tb_apartamento` (
+  `id_apartamento` INT NOT NULL AUTO_INCREMENT ,
+  `num_apartamento` INT NOT NULL ,
+  `tb_Bloco_id_Bloco` INT NOT NULL ,
+  `num_vaga` INT NULL ,
+  PRIMARY KEY (`id_apartamento`, `num_apartamento`) ,
+  INDEX `fk_tb_apartamento_tb_Bloco1_idx` (`tb_Bloco_id_Bloco` ASC) ,
+  CONSTRAINT `fk_tb_apartamento_tb_Bloco1`
+    FOREIGN KEY (`tb_Bloco_id_Bloco` )
+    REFERENCES `mydb`.`tb_Bloco` (`id_Bloco` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `mydb`.`tb_status_morador`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`tb_status_morador` (
@@ -145,6 +163,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`tb_morador` (
   INDEX `fk_tb_morador_tb_status_morador1_idx` (`tb_status_morador_id_status_morador` ASC) ,
   INDEX `fk_tb_morador_tb_veiculos1_idx` (`tb_veiculos_placa` ASC) ,
   INDEX `fk_tb_morador_usuario1_idx` (`usuario_id_usuario` ASC) ,
+  INDEX `fk_tb_morador_tb_morador1_idx` (`cpf_morador` ASC) ,
   CONSTRAINT `fk_tb_morador_tb_status_morador1`
     FOREIGN KEY (`tb_status_morador_id_status_morador` )
     REFERENCES `mydb`.`tb_status_morador` (`id_status_morador` )
@@ -159,30 +178,10 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`tb_morador` (
     FOREIGN KEY (`usuario_id_usuario` )
     REFERENCES `mydb`.`usuario` (`id_usuario` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`tb_apartamento`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_apartamento` (
-  `id_apartamento` INT NOT NULL AUTO_INCREMENT ,
-  `num_apartamento` INT NOT NULL ,
-  `tb_Bloco_id_Bloco` INT NOT NULL ,
-  `tb_morador_id_morador` INT NOT NULL ,
-  `num_vaga` INT NULL ,
-  PRIMARY KEY (`id_apartamento`, `num_apartamento`) ,
-  INDEX `fk_tb_apartamento_tb_Bloco1_idx` (`tb_Bloco_id_Bloco` ASC) ,
-  INDEX `fk_tb_apartamento_tb_morador1_idx` (`tb_morador_id_morador` ASC) ,
-  CONSTRAINT `fk_tb_apartamento_tb_Bloco1`
-    FOREIGN KEY (`tb_Bloco_id_Bloco` )
-    REFERENCES `mydb`.`tb_Bloco` (`id_Bloco` )
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_apartamento_tb_morador1`
-    FOREIGN KEY (`tb_morador_id_morador` )
-    REFERENCES `mydb`.`tb_morador` (`id_morador` )
+  CONSTRAINT `fk_tb_morador_tb_morador1`
+    FOREIGN KEY (`cpf_morador` )
+    REFERENCES `mydb`.`tb_morador` (`tb_tipo_morador_id_tipo_morador` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -312,6 +311,29 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`tb_visita_morador` (
   CONSTRAINT `fk_tb_visita_morador_tb_morador1`
     FOREIGN KEY (`tb_morador_id_morador1` )
     REFERENCES `mydb`.`tb_morador` (`id_morador` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`tb_morador_apartamento`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mydb`.`tb_morador_apartamento` (
+  `tb_morador_id_morador` INT NOT NULL ,
+  `tb_apartamento_id_apartamento` INT NOT NULL ,
+  `tb_apartamento_num_apartamento` INT NOT NULL ,
+  PRIMARY KEY (`tb_morador_id_morador`, `tb_apartamento_id_apartamento`, `tb_apartamento_num_apartamento`) ,
+  INDEX `fk_tb_morador_has_tb_apartamento_tb_apartamento1_idx` (`tb_apartamento_id_apartamento` ASC, `tb_apartamento_num_apartamento` ASC) ,
+  INDEX `fk_tb_morador_has_tb_apartamento_tb_morador1_idx` (`tb_morador_id_morador` ASC) ,
+  CONSTRAINT `fk_tb_morador_has_tb_apartamento_tb_morador1`
+    FOREIGN KEY (`tb_morador_id_morador` )
+    REFERENCES `mydb`.`tb_morador` (`id_morador` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tb_morador_has_tb_apartamento_tb_apartamento1`
+    FOREIGN KEY (`tb_apartamento_id_apartamento` , `tb_apartamento_num_apartamento` )
+    REFERENCES `mydb`.`tb_apartamento` (`id_apartamento` , `num_apartamento` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
