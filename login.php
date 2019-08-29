@@ -25,7 +25,7 @@
             <img id="logo" class="profile-img-card" src="imagens/logo.jpeg" />
                 <p id="profile-name" class="profile-name-card"></p> 
       
-                <form id="form_login" class="form-signin" action="validacao.php" method="post" enctype="multipart/form-data">
+                <form id="form_login" class="form-signin" action="controller/validacao_login.php" method="post" enctype="multipart/form-data">
                 <!--<span id="reauth-email" class="reauth-email"></span>-->
                 <input id="usuario" type="text" name="usuario" class="form-control" placeholder=" usuario" required autofocus>
                 <input id="senha" type="password" name="senha" class="form-control" placeholder=" Senha" required>
