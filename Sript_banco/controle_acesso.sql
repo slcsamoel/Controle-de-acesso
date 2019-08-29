@@ -53,21 +53,14 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`tb_funcionario` (
   `rg_func` INT NOT NULL ,
   `turno` VARCHAR(10) NULL ,
   `tb_condominio_id_cond` INT NOT NULL ,
-  `usuario_id_usuario` INT NOT NULL ,
   `usuario_id_usuario1` INT NOT NULL ,
   `sexo` VARCHAR(45) NULL ,
   PRIMARY KEY (`id_func`, `cpf`) ,
   INDEX `fk_tb_funcionario_tb_condominio_idx` (`tb_condominio_id_cond` ASC) ,
-  INDEX `fk_tb_funcionario_usuario1_idx` (`usuario_id_usuario` ASC) ,
   INDEX `fk_tb_funcionario_usuario2_idx` (`usuario_id_usuario1` ASC) ,
   CONSTRAINT `fk_tb_funcionario_tb_condominio`
     FOREIGN KEY (`tb_condominio_id_cond` )
     REFERENCES `mydb`.`tb_condominio` (`id_cond` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_funcionario_usuario1`
-    FOREIGN KEY (`usuario_id_usuario` )
-    REFERENCES `mydb`.`usuario` (`id_usuario` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tb_funcionario_usuario2`
