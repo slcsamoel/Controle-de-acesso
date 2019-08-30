@@ -1,6 +1,8 @@
-<?php
-require_once ('../model/Pessoa.php');
-class Usuario  extends Pessoa{
+
+<?php 
+require_once('Pessoa.php');
+
+class Usuario extends Pessoa {
 
     private $id ; 
     private $senha; 
@@ -14,12 +16,13 @@ class Usuario  extends Pessoa{
         return $this->id;
 
     }
-	
+
     public function getSenha()
     {
         return $this->senha;
-    }
- 
+}
+
+     
     public function setSenha($senha)
     {
         $this->senha = $senha;
@@ -29,3 +32,4 @@ class Usuario  extends Pessoa{
 }
 
 ?>
+
