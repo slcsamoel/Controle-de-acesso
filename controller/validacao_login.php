@@ -1,4 +1,5 @@
 <?php
+
 require_once ('../model/Usuario.php');
 require_once ('../model/Pessoa.php');
 //require_once ('conexao_banco.php');
@@ -11,6 +12,5 @@ require_once ('../model/Pessoa.php');
         
 
     
-
 
 ?>
