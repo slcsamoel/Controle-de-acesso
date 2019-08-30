@@ -1,4 +1,4 @@
-<?php require_once "navegacao.php";?>
+<?php include "cabecalho.php";?>
 
   
 
@@ -15,4 +15,4 @@
 
      </div> 
 
-     <?php require_once "rodape.php";?>
+     <?php include "rodape.php";?>

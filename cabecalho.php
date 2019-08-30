@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,12 +8,15 @@
     <title>Navegação</title>
 
     <!-- Bootstrap -->
+    
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
      <link href="css/estilo.css" rel="stylesheet">
+     
   </head>
   <body>
-    <!--Barra navegaçaõ -->
-         <nav class="navbar navbar-default">
+
+   <!--Barra navegaçaõ -->
+   <nav class="navbar navbar-default">
               <div class="container">
                 <div class="navbar-header">
                   <a href="" class="navbar-brand">Controle de Acesso</a>
@@ -75,5 +78,4 @@
              <script src="bootstrap/js/bootstrap.min.js"></script>
            
       <div id="all">
-
-           
+</div>
