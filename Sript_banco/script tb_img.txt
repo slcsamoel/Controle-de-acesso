@@ -1,0 +1,12 @@
+
+CREATE TABLE tabela_imagens(
+id int(10)NOT NULL PRIMARY KEY AUTO_INCREMENT,
+id_funcionario int ,    
+evento varchar(50) NOT NULL,
+descricao varchar(255) NOT NULL,
+nome_imagem varchar(25) NOT NULL,
+tamanho_imagem varchar(25) NOT NULL,
+tipo_imagem varchar(25) NOT NULL,
+imagem longblob NOT NULL,
+    FOREIGN key(id_funcionario)REFERENCES tb_funcionario(id_funcionario)
+);

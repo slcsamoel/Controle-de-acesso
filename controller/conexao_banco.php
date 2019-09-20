@@ -1,6 +1,6 @@
 <?php
 
-$link = mysqli_connect("localhost", "root", "", "mydb"); // Conecta com o banco de dados
+$link = mysqli_connect("localhost", "root", "", "controle_acesso"); // Conecta com o banco de dados
 
 if(!$link){
     try{	

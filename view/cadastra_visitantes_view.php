@@ -1,4 +1,4 @@
-<?php require_once "../navegacao.php";?>
+<?php require_once "../cabecalho_aux.php";?>
 
 <title>formulario_morado</title>
 

@@ -1,5 +1,5 @@
- <?php require_once "../navegacao.php";?>
- <title>cadastrar_morado</title>
+ <?php require_once "../cabecalho_aux.php";?>
+ <title>cadastrar_morador</title>
 
  <!-- Bootstrap -->
  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">

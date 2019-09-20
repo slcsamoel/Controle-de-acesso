@@ -1,14 +1,15 @@
-<?php require_once "../navegacao.php";?>
 
-<title>formulario_morado</title>
 
-<!-- Bootstrap -->
-<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="../css/estilo.css" rel="stylesheet">
-
+<?php require_once "../cabecalho_aux.php";?>
+ 
+    <title>visitante</title>
+  <!-- Bootstrap -->
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/estilo.css" rel="stylesheet">
+  
 <div class="container">
   <div class="pager-header">
-    <h1>Funcionário</h1>
+    <h1>Visitantes</h1>
   </div>
   <div class="row">
     <div class="col-sm-12">
@@ -16,6 +17,7 @@
       <form class="form-horizontal">
 
         <div class="panel panel-primary">
+
 
           <div class="panel-body">
             <div class="form-group">
@@ -87,62 +89,78 @@
 
             <!-- Prepended text-->
 
-          </div>
-
-          <!-- Select Basic -->
-          <div class="form-group">
-            <label class="col-md-2 control-label" for="Estado Civil">Turno<h11>*</h11></label>
+            <label class="col-md-2 control-label" for="prependedtext">Morador</label>
             <div class="col-md-2">
-              <select required id="Estado Civil" name="Estado Civil" class="form-control">
-                <option value=""></option>
-                <option value="Solteiro(a)">Diurno</option>
-                <option value="Casado(a)">Noturno</option>
-              </select>
+              <div class="input-group">
+                <span class="input-group-addon">Torre <h11>*</h11></span>
+                <input id="numero" name="numero" class="form-control" placeholder="" required=""  type="text">
+              </div>
+
             </div>
-            <label class="col-md-1 control-label" for="Nome">Entrada<h11>*</h11></label>  
+
             <div class="col-md-2">
-              <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA 00:00" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
-            </div>
-            <label class="col-md-1 control-label" for="Nome">Saida<h11>*</h11></label>  
-            <div class="col-md-2">
-              <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA 00:00" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
-            </div>
-            <div class="col-sm-2">
-              <img src="../imagens/img_morador.png" class= "img-responsive img-thumbnail">
+             <div class="input-group">
+              <span class="input-group-addon">Numero<h11>*</h11></span>
+              <input id="numero" name="numero" class="form-control" placeholder="" required=""  type="text">
             </div>
 
-            <!-- Prepended checkbox -->
           </div>
-
-
-          <!-- Select Basic -->
-          <div class="form-group">
-
-            <div class="col-md-8">
-
-            </div>
-            <div class="col-md-1">
-              <button type="button" class="btn btn-primary">Altera</button>
-            </div>
-
-            <div class="col-md-1">
-              <button type="button" class="btn btn-primary">Inativa</button>
-            </div>
-
-            <div class="col-md-1">
-              <button type="button" class="btn btn-primary">Entrada</button>
-            </div>
-
-            <div class="col-md-1">
-              <button type="button" class="btn btn-primary">Saida</button>
-            </div>
-          </div>
-
-
         </div>
 
-        <!-- Text input-->
+        <!-- Select Basic -->
+        <div class="form-group">
+          <label class="col-md-2 control-label" for="Estado Civil">Tipo de visitante <h11>*</h11></label>
+          <div class="col-md-2">
+            <select required id="Estado Civil" name="Estado Civil" class="form-control">
+              <option value=""></option>
+              <option value="Solteiro(a)">Solteiro(a)</option>
+              <option value="Casado(a)">Casado(a)</option>
+              <option value="Divorciado(a)">Divorciado(a)</option>
+              <option value="Viuvo(a)">Viuvo(a)</option>
+            </select>
+          </div>
+          <label class="col-md-1 control-label" for="Nome">Entrada<h11>*</h11></label>  
+          <div class="col-md-2">
+            <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA 00:00" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+          </div>
+          <label class="col-md-1 control-label" for="Nome">Saida<h11>*</h11></label>  
+          <div class="col-md-2">
+            <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA 00:00" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+          </div>
+
+          <!-- Prepended checkbox -->
+        </div>
+
+
+        <!-- Select Basic -->
+         <div class="form-group">
+
+          <div class="col-md-8">
+
+          </div>
+          <div class="col-md-1">
+            <button type="button" class="btn btn-primary" onclick="">Altera</button>
+          </div>
+
+          <div class="col-md-1">
+            <button type="button" class="btn btn-primary" onclick="">Inativa</button>
+          </div>
+
+          <div class="col-md-1">
+            <button type="button" class="btn btn-primary" onclick="">Entrada</button>
+          </div>
+
+          <div class="col-md-1">
+            <button type="button" class="btn btn-primary" onclick="">Saida</button>
+          </div>
+        </div>
+
+
       </div>
 
+      <!-- Text input-->
     </div>
-    <?php require_once "../rodape.php";?>
+
+</div>
+
+      <?php require_once "../rodape.php";?>

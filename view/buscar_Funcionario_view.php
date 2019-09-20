@@ -1,4 +1,4 @@
-<?php require_once "../navegacao.php";?>
+<?php require_once "../cabecalho_aux.php";?>
 <title>buscar_funcionario</title>
 
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -11,21 +11,16 @@
   <div class="row">
     <div class="col-sm-12">
 
-      <form class="form-horizontal">
+      <form class="form-horizontal" action="../controller/buscar_funcionario.php" method="post" >
 
         <div class="panel panel-primary">
 
           <div class="panel-body">
             <div class="form-group">
               <div class="col-md-11 control-label">
-                <label class="col-md-2 control-label" for="cpf">CPF <h11></h11></label>  
+                <label class="col-md-2 control-label" for="cpf">CPF<h11></h11></label>  
                 <div class="col-md-2">
-                  <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
-                </div>
-                <label class="col-md-2 control-label" for="id">Nome<h11></h11></label>  
-                <div class="col-md-4">
-                  <input id="id" name="id" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
-                </div>
+                  <input id="cpf" name="cpf" placeholder="Insira o CPF" class="form-control input-md"  type="text" maxlength="11" pattern="[0-9]+$">
 
               </div>
             </div>
@@ -37,7 +32,7 @@
 
             </div>
             <div class="col-md-2">
-              <button type="button" class="btn btn-primary">Buscar
+              <button type="submit" class="btn btn-primary" value="buscar">Buscar
               </button>
             </div>
 
