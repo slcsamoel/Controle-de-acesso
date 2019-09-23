@@ -1,19 +1,4 @@
 <?php
-<<<<<<< Updated upstream
-
-require_once ('../model/Usuario.php');
-require_once ('../model/Pessoa.php');
-//require_once ('conexao_banco.php');
-
-
-        $class_usuario = new usuario();
-
-        $class_usuario->setNome($nome = $_POST['usuario']);
-        $class_usuario->setSenha($senha = $_POST['senha']);
-        
-
-    
-=======
     session_start();
 require_once('../model/Usuario.php');
 require_once('../model/Pessoa.php');
@@ -43,6 +28,5 @@ $class_usuario->setNome($senha = $_POST['senha']);
         }   
 }
 logar($link, $nome, $senha);
->>>>>>> Stashed changes
 
 ?>
