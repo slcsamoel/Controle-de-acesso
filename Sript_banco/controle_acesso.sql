@@ -1,331 +1,599 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+-- phpMyAdmin SQL Dump
+-- version 4.9.0.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 27-Set-2019 às 03:46
+-- Versão do servidor: 10.4.6-MariaDB
+-- versão do PHP: 7.3.8
 
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
-USE `mydb` ;
-
--- -----------------------------------------------------
--- Table `mydb`.`tb_condominio`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_condominio` (
-  `id_cond` INT NOT NULL AUTO_INCREMENT ,
-  `nome_cond` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id_cond`) )
-ENGINE = InnoDB;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_nivel_acesso`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_nivel_acesso` (
-  `id_nivel_acesso` INT NOT NULL ,
-  `nivel_acesso` INT(1) NOT NULL ,
-  PRIMARY KEY (`id_nivel_acesso`, `nivel_acesso`) )
-ENGINE = InnoDB;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Banco de dados: `controle_acesso`
+--
 
--- -----------------------------------------------------
--- Table `mydb`.`usuario`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`usuario` (
-  `id_usuario` INT NOT NULL ,
-  `senha` VARCHAR(45) NOT NULL ,
-  `tb_nivel_acesso_id_nivel_acesso` INT NOT NULL ,
-  `tb_nivel_acesso_nivel_acesso` INT(1) NOT NULL ,
-  PRIMARY KEY (`id_usuario`) ,
-  INDEX `fk_usuario_tb_nivel_acesso1_idx` (`tb_nivel_acesso_id_nivel_acesso` ASC, `tb_nivel_acesso_nivel_acesso` ASC) ,
-  CONSTRAINT `fk_usuario_tb_nivel_acesso1`
-    FOREIGN KEY (`tb_nivel_acesso_id_nivel_acesso` , `tb_nivel_acesso_nivel_acesso` )
-    REFERENCES `mydb`.`tb_nivel_acesso` (`id_nivel_acesso` , `nivel_acesso` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estrutura da tabela `tb_apartamento`
+--
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_funcionario`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_funcionario` (
-  `id_func` INT NOT NULL ,
-  `cpf` VARCHAR(11) NOT NULL ,
-  `nome_fun` VARCHAR(100) NOT NULL ,
-  `rg_func` INT NOT NULL ,
-  `turno` VARCHAR(10) NULL ,
-  `tb_condominio_id_cond` INT NOT NULL ,
-  `usuario_id_usuario1` INT NOT NULL ,
-  `sexo` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id_func`, `cpf`) ,
-  INDEX `fk_tb_funcionario_tb_condominio_idx` (`tb_condominio_id_cond` ASC) ,
-  INDEX `fk_tb_funcionario_usuario2_idx` (`usuario_id_usuario1` ASC) ,
-  CONSTRAINT `fk_tb_funcionario_tb_condominio`
-    FOREIGN KEY (`tb_condominio_id_cond` )
-    REFERENCES `mydb`.`tb_condominio` (`id_cond` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_funcionario_usuario2`
-    FOREIGN KEY (`usuario_id_usuario1` )
-    REFERENCES `mydb`.`usuario` (`id_usuario` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `tb_apartamento` (
+  `id_apartamento` int(11) NOT NULL,
+  `nr_apartamento` int(11) NOT NULL,
+  `id_bloco` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_Bloco`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_Bloco` (
-  `id_Bloco` INT NOT NULL ,
-  `nome_Bloco` VARCHAR(45) NULL ,
-  `tb_condominio_id_cond` INT NOT NULL ,
-  PRIMARY KEY (`id_Bloco`) ,
-  INDEX `fk_tb_Bloco_tb_condominio1_idx` (`tb_condominio_id_cond` ASC) ,
-  CONSTRAINT `fk_tb_Bloco_tb_condominio1`
-    FOREIGN KEY (`tb_condominio_id_cond` )
-    REFERENCES `mydb`.`tb_condominio` (`id_cond` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Estrutura da tabela `tb_bloco`
+--
 
+CREATE TABLE `tb_bloco` (
+  `id_bloco` int(11) NOT NULL,
+  `nome` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_apartamento`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_apartamento` (
-  `id_apartamento` INT NOT NULL AUTO_INCREMENT ,
-  `num_apartamento` INT NOT NULL ,
-  `tb_Bloco_id_Bloco` INT NOT NULL ,
-  `num_vaga` INT NULL ,
-  PRIMARY KEY (`id_apartamento`, `num_apartamento`) ,
-  INDEX `fk_tb_apartamento_tb_Bloco1_idx` (`tb_Bloco_id_Bloco` ASC) ,
-  CONSTRAINT `fk_tb_apartamento_tb_Bloco1`
-    FOREIGN KEY (`tb_Bloco_id_Bloco` )
-    REFERENCES `mydb`.`tb_Bloco` (`id_Bloco` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estrutura da tabela `tb_espacos`
+--
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_status_morador`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_status_morador` (
-  `id_status_morador` INT NOT NULL ,
-  `status_morador` VARCHAR(45) NOT NULL ,
-  `dt_entrada` DATETIME NOT NULL ,
-  `dt_saida` DATETIME NOT NULL ,
-  `situação` VARCHAR(7) NULL ,
-  PRIMARY KEY (`id_status_morador`) )
-ENGINE = InnoDB;
+CREATE TABLE `tb_espacos` (
+  `id_espacos` int(11) NOT NULL,
+  `descrição` varchar(45) NOT NULL,
+  `id_bloco` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_veiculos`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_veiculos` (
-  `placa` VARCHAR(8) NOT NULL ,
-  `descricao` VARCHAR(45) NOT NULL ,
-  `usuario_id_usuario` INT NOT NULL ,
-  PRIMARY KEY (`placa`) ,
-  INDEX `fk_tb_veiculos_usuario1_idx` (`usuario_id_usuario` ASC) ,
-  CONSTRAINT `fk_tb_veiculos_usuario1`
-    FOREIGN KEY (`usuario_id_usuario` )
-    REFERENCES `mydb`.`usuario` (`id_usuario` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Estrutura da tabela `tb_funcionario`
+--
 
+CREATE TABLE `tb_funcionario` (
+  `id_funcionario` int(11) NOT NULL,
+  `cpf` varchar(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `rg` int(11) NOT NULL,
+  `turno` varchar(10) NOT NULL,
+  `sexo` varchar(45) NOT NULL,
+  `telefone` varchar(13) DEFAULT NULL,
+  `id_status` int(11) DEFAULT NULL,
+  `dt_cadastro` date NOT NULL DEFAULT current_timestamp(),
+  `dt_nascimento` date NOT NULL,
+  `imagem` longblob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_morador`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_morador` (
-  `id_morador` INT NOT NULL ,
-  `nome_morador` VARCHAR(100) NOT NULL ,
-  `rg_morador` INT NOT NULL ,
-  `dt_nacimento` DATE NOT NULL ,
-  `dt_cadastro` DATETIME NOT NULL ,
-  `tb_tipo_morador_id_tipo_morador` INT NOT NULL ,
-  `tb_status_morador_id_status_morador` INT NOT NULL ,
-  `tb_veiculos_placa` VARCHAR(8) NOT NULL ,
-  `usuario_id_usuario` INT NOT NULL ,
-  `tipo_morador` VARCHAR(45) NOT NULL ,
-  `sexo` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id_morador`) ,
-  INDEX `fk_tb_morador_tb_status_morador1_idx` (`tb_status_morador_id_status_morador` ASC) ,
-  INDEX `fk_tb_morador_tb_veiculos1_idx` (`tb_veiculos_placa` ASC) ,
-  INDEX `fk_tb_morador_usuario1_idx` (`usuario_id_usuario` ASC) ,
-  CONSTRAINT `fk_tb_morador_tb_status_morador1`
-    FOREIGN KEY (`tb_status_morador_id_status_morador` )
-    REFERENCES `mydb`.`tb_status_morador` (`id_status_morador` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_morador_tb_veiculos1`
-    FOREIGN KEY (`tb_veiculos_placa` )
-    REFERENCES `mydb`.`tb_veiculos` (`placa` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_morador_usuario1`
-    FOREIGN KEY (`usuario_id_usuario` )
-    REFERENCES `mydb`.`usuario` (`id_usuario` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Extraindo dados da tabela `tb_funcionario`
+--
 
+INSERT INTO `tb_funcionario` (`id_funcionario`, `cpf`, `nome`, `rg`, `turno`, `sexo`, `telefone`, `id_status`, `dt_cadastro`, `dt_nascimento`, `imagem`) VALUES
+(1, '02923154142', 'Samoel lopes costa', 5002095, 'diurno', 'masculino', NULL, 1, '2019-09-16', '0000-00-00', ''),
+(2, '00500600821', 'Nivaldo Henrique', 1010101, 'noturno', 'Indefinido', NULL, 1, '2019-09-16', '0000-00-00', '');
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_tipo_visitante`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_tipo_visitante` (
-  `idtb_tipo_visita` INT NOT NULL ,
-  `tipo_visita` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`idtb_tipo_visita`) )
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estrutura da tabela `tb_img_funcionario`
+--
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_status_visitante`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_status_visitante` (
-  `idtb_status_visitante` INT NOT NULL ,
-  `status_visitante` VARCHAR(45) NOT NULL ,
-  `dt_entrada` DATETIME NOT NULL ,
-  `dt_saida` DATETIME NOT NULL ,
-  PRIMARY KEY (`idtb_status_visitante`) )
-ENGINE = InnoDB;
+CREATE TABLE `tb_img_funcionario` (
+  `id_imagem` int(10) NOT NULL,
+  `id_funcionario` int(11) DEFAULT NULL,
+  `imagem` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_visitante`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_visitante` (
-  `id_visitante` INT NOT NULL ,
-  `nome_visitante` VARCHAR(100) NOT NULL ,
-  `cpf_visitante` VARCHAR(11) NOT NULL ,
-  `rg_visitante` INT NOT NULL ,
-  `acomp_visitante` VARCHAR(200) NULL ,
-  `tb_tipo_visitante_idtb_tipo_visita` INT NOT NULL ,
-  `usuario_id_usuario` INT NOT NULL ,
-  `tb_status_visitante_idtb_status_visitante` INT NOT NULL ,
-  `sexo` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id_visitante`, `cpf_visitante`) ,
-  INDEX `fk_tb_visitante_tb_tipo_visitante1_idx` (`tb_tipo_visitante_idtb_tipo_visita` ASC) ,
-  INDEX `fk_tb_visitante_usuario1_idx` (`usuario_id_usuario` ASC) ,
-  INDEX `fk_tb_visitante_tb_status_visitante1_idx` (`tb_status_visitante_idtb_status_visitante` ASC) ,
-  CONSTRAINT `fk_tb_visitante_tb_tipo_visitante1`
-    FOREIGN KEY (`tb_tipo_visitante_idtb_tipo_visita` )
-    REFERENCES `mydb`.`tb_tipo_visitante` (`idtb_tipo_visita` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_visitante_usuario1`
-    FOREIGN KEY (`usuario_id_usuario` )
-    REFERENCES `mydb`.`usuario` (`id_usuario` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_visitante_tb_status_visitante1`
-    FOREIGN KEY (`tb_status_visitante_idtb_status_visitante` )
-    REFERENCES `mydb`.`tb_status_visitante` (`idtb_status_visitante` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Estrutura da tabela `tb_img_morador`
+--
 
+CREATE TABLE `tb_img_morador` (
+  `id_imagem` int(11) NOT NULL,
+  `id_morador` int(11) DEFAULT NULL,
+  `imagem` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_espaco`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_espaco` (
-  `id_espaco` INT NOT NULL ,
-  `nome_espaco` VARCHAR(45) NOT NULL ,
-  `tb_Bloco_id_Bloco` INT NOT NULL ,
-  PRIMARY KEY (`id_espaco`) ,
-  INDEX `fk_tb_espaco_tb_Bloco1_idx` (`tb_Bloco_id_Bloco` ASC) ,
-  CONSTRAINT `fk_tb_espaco_tb_Bloco1`
-    FOREIGN KEY (`tb_Bloco_id_Bloco` )
-    REFERENCES `mydb`.`tb_Bloco` (`id_Bloco` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estrutura da tabela `tb_morador`
+--
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_reserva`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_reserva` (
-  `idtb_reserva` INT NOT NULL ,
-  `dt_reserva` DATETIME NULL ,
-  `tb_espaco_id_espaco` INT NOT NULL ,
-  `tb_morador_id_morador` INT NOT NULL ,
-  `usuario_id_usuario` INT NOT NULL ,
-  PRIMARY KEY (`idtb_reserva`) ,
-  INDEX `fk_tb_reserva_tb_espaco1_idx` (`tb_espaco_id_espaco` ASC) ,
-  INDEX `fk_tb_reserva_tb_morador1_idx` (`tb_morador_id_morador` ASC) ,
-  INDEX `fk_tb_reserva_usuario1_idx` (`usuario_id_usuario` ASC) ,
-  CONSTRAINT `fk_tb_reserva_tb_espaco1`
-    FOREIGN KEY (`tb_espaco_id_espaco` )
-    REFERENCES `mydb`.`tb_espaco` (`id_espaco` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_reserva_tb_morador1`
-    FOREIGN KEY (`tb_morador_id_morador` )
-    REFERENCES `mydb`.`tb_morador` (`id_morador` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_reserva_usuario1`
-    FOREIGN KEY (`usuario_id_usuario` )
-    REFERENCES `mydb`.`usuario` (`id_usuario` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `tb_morador` (
+  `id_morador` int(11) NOT NULL,
+  `cpf` varchar(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `rg` int(11) NOT NULL,
+  `dt_nascimento` date DEFAULT NULL,
+  `sexo` varchar(1) DEFAULT NULL,
+  `dt_cadastro` datetime DEFAULT current_timestamp(),
+  `tipo_morador` varchar(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `id_status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_visita_morador`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_visita_morador` (
-  `tb_morador_id_morador` INT NOT NULL ,
-  `tb_visitante_id_visitante` INT NOT NULL ,
-  `tb_visitante_cpf_visitante` VARCHAR(11) NOT NULL ,
-  `tb_morador_id_morador1` INT NOT NULL ,
-  PRIMARY KEY (`tb_morador_id_morador`) ,
-  INDEX `fk_tb_visita_morador_tb_visitante1_idx` (`tb_visitante_id_visitante` ASC, `tb_visitante_cpf_visitante` ASC) ,
-  INDEX `fk_tb_visita_morador_tb_morador1_idx` (`tb_morador_id_morador1` ASC) ,
-  CONSTRAINT `fk_tb_visita_morador_tb_visitante1`
-    FOREIGN KEY (`tb_visitante_id_visitante` , `tb_visitante_cpf_visitante` )
-    REFERENCES `mydb`.`tb_visitante` (`id_visitante` , `cpf_visitante` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_visita_morador_tb_morador1`
-    FOREIGN KEY (`tb_morador_id_morador1` )
-    REFERENCES `mydb`.`tb_morador` (`id_morador` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Estrutura da tabela `tb_morador_apartamento`
+--
 
+CREATE TABLE `tb_morador_apartamento` (
+  `id_morador_apartamento` int(11) NOT NULL,
+  `id_morador` int(11) DEFAULT NULL,
+  `id_apartamento` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- -----------------------------------------------------
--- Table `mydb`.`tb_morador_apartamento`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tb_morador_apartamento` (
-  `tb_morador_id_morador` INT NOT NULL ,
-  `tb_apartamento_id_apartamento` INT NOT NULL ,
-  `tb_apartamento_num_apartamento` INT NOT NULL ,
-  PRIMARY KEY (`tb_morador_id_morador`, `tb_apartamento_id_apartamento`, `tb_apartamento_num_apartamento`) ,
-  INDEX `fk_tb_morador_has_tb_apartamento_tb_apartamento1_idx` (`tb_apartamento_id_apartamento` ASC, `tb_apartamento_num_apartamento` ASC) ,
-  INDEX `fk_tb_morador_has_tb_apartamento_tb_morador1_idx` (`tb_morador_id_morador` ASC) ,
-  CONSTRAINT `fk_tb_morador_has_tb_apartamento_tb_morador1`
-    FOREIGN KEY (`tb_morador_id_morador` )
-    REFERENCES `mydb`.`tb_morador` (`id_morador` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_morador_has_tb_apartamento_tb_apartamento1`
-    FOREIGN KEY (`tb_apartamento_id_apartamento` , `tb_apartamento_num_apartamento` )
-    REFERENCES `mydb`.`tb_apartamento` (`id_apartamento` , `num_apartamento` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estrutura da tabela `tb_mov_morador`
+--
 
+CREATE TABLE `tb_mov_morador` (
+  `id_movimentaçao` int(11) NOT NULL,
+  `id_morador` int(11) DEFAULT NULL,
+  `dt_entrada` datetime DEFAULT current_timestamp(),
+  `dt_saida` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_nivel_acesso`
+--
+
+CREATE TABLE `tb_nivel_acesso` (
+  `id_nivel_acesso` int(11) NOT NULL,
+  `nivel_acesso` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_nivel_acesso`
+--
+
+INSERT INTO `tb_nivel_acesso` (`id_nivel_acesso`, `nivel_acesso`) VALUES
+(1, 'portaria'),
+(2, 'sindico');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_reserva`
+--
+
+CREATE TABLE `tb_reserva` (
+  `id_reserva` int(11) NOT NULL,
+  `dt_reserva` date DEFAULT NULL,
+  `id_espaco` int(11) DEFAULT NULL,
+  `id_morador` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_status`
+--
+
+CREATE TABLE `tb_status` (
+  `id_status` int(11) NOT NULL DEFAULT 1,
+  `STATUS` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_status`
+--
+
+INSERT INTO `tb_status` (`id_status`, `STATUS`) VALUES
+(1, 'Ativo'),
+(2, 'inativo');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_tipo_visita`
+--
+
+CREATE TABLE `tb_tipo_visita` (
+  `id_tipo_visita` int(11) NOT NULL,
+  `id_visitante` int(11) DEFAULT NULL,
+  `tipo_visita` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_usuario`
+--
+
+CREATE TABLE `tb_usuario` (
+  `id_usuario` int(11) NOT NULL,
+  `senha` varchar(45) NOT NULL,
+  `usuario` varchar(14) NOT NULL,
+  `id_nivel_acesso` int(1) NOT NULL,
+  `id_funcionario` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_usuario`
+--
+
+INSERT INTO `tb_usuario` (`id_usuario`, `senha`, `usuario`, `id_nivel_acesso`, `id_funcionario`) VALUES
+(1, '1234', 'samoel', 2, 1),
+(2, '12345', 'nivaldo', 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_veiculo`
+--
+
+CREATE TABLE `tb_veiculo` (
+  `id_veiculo` int(11) NOT NULL,
+  `id_morador` int(11) DEFAULT NULL,
+  `placa` varchar(9) NOT NULL,
+  `descrição` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_visitante`
+--
+
+CREATE TABLE `tb_visitante` (
+  `id_visitante` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `cpf` varchar(11) DEFAULT NULL,
+  `rg` int(11) DEFAULT NULL,
+  `telefone` varchar(9) DEFAULT NULL,
+  `acompanhantes` text DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `id_status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_visita_morador`
+--
+
+CREATE TABLE `tb_visita_morador` (
+  `id_visita_morador` int(11) NOT NULL,
+  `id_morador` int(11) DEFAULT NULL,
+  `id_visitante` int(11) DEFAULT NULL,
+  `dt_entrada` datetime NOT NULL DEFAULT current_timestamp(),
+  `dt_saida` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `tb_apartamento`
+--
+ALTER TABLE `tb_apartamento`
+  ADD PRIMARY KEY (`id_apartamento`),
+  ADD KEY `id_bloco` (`id_bloco`);
+
+--
+-- Índices para tabela `tb_bloco`
+--
+ALTER TABLE `tb_bloco`
+  ADD PRIMARY KEY (`id_bloco`);
+
+--
+-- Índices para tabela `tb_espacos`
+--
+ALTER TABLE `tb_espacos`
+  ADD PRIMARY KEY (`id_espacos`),
+  ADD KEY `id_bloco` (`id_bloco`);
+
+--
+-- Índices para tabela `tb_funcionario`
+--
+ALTER TABLE `tb_funcionario`
+  ADD PRIMARY KEY (`id_funcionario`),
+  ADD KEY `id_status` (`id_status`);
+
+--
+-- Índices para tabela `tb_img_funcionario`
+--
+ALTER TABLE `tb_img_funcionario`
+  ADD PRIMARY KEY (`id_imagem`),
+  ADD KEY `id_funcionario` (`id_funcionario`);
+
+--
+-- Índices para tabela `tb_img_morador`
+--
+ALTER TABLE `tb_img_morador`
+  ADD PRIMARY KEY (`id_imagem`),
+  ADD KEY `id_morador` (`id_morador`);
+
+--
+-- Índices para tabela `tb_morador`
+--
+ALTER TABLE `tb_morador`
+  ADD PRIMARY KEY (`id_morador`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_status` (`id_status`);
+
+--
+-- Índices para tabela `tb_morador_apartamento`
+--
+ALTER TABLE `tb_morador_apartamento`
+  ADD PRIMARY KEY (`id_morador_apartamento`),
+  ADD KEY `id_morador` (`id_morador`),
+  ADD KEY `id_apartamento` (`id_apartamento`);
+
+--
+-- Índices para tabela `tb_mov_morador`
+--
+ALTER TABLE `tb_mov_morador`
+  ADD PRIMARY KEY (`id_movimentaçao`),
+  ADD KEY `id_morador` (`id_morador`);
+
+--
+-- Índices para tabela `tb_nivel_acesso`
+--
+ALTER TABLE `tb_nivel_acesso`
+  ADD PRIMARY KEY (`id_nivel_acesso`);
+
+--
+-- Índices para tabela `tb_reserva`
+--
+ALTER TABLE `tb_reserva`
+  ADD PRIMARY KEY (`id_reserva`),
+  ADD KEY `id_espaco` (`id_espaco`),
+  ADD KEY `id_morador` (`id_morador`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Índices para tabela `tb_status`
+--
+ALTER TABLE `tb_status`
+  ADD PRIMARY KEY (`id_status`);
+
+--
+-- Índices para tabela `tb_tipo_visita`
+--
+ALTER TABLE `tb_tipo_visita`
+  ADD PRIMARY KEY (`id_tipo_visita`),
+  ADD KEY `id_visitante` (`id_visitante`);
+
+--
+-- Índices para tabela `tb_usuario`
+--
+ALTER TABLE `tb_usuario`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD KEY `id_funcionario` (`id_funcionario`),
+  ADD KEY `id_nivel_acesso` (`id_nivel_acesso`),
+  ADD KEY `id_nivel_acesso_2` (`id_nivel_acesso`);
+
+--
+-- Índices para tabela `tb_veiculo`
+--
+ALTER TABLE `tb_veiculo`
+  ADD PRIMARY KEY (`id_veiculo`),
+  ADD KEY `id_morador` (`id_morador`);
+
+--
+-- Índices para tabela `tb_visitante`
+--
+ALTER TABLE `tb_visitante`
+  ADD PRIMARY KEY (`id_visitante`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_status` (`id_status`);
+
+--
+-- Índices para tabela `tb_visita_morador`
+--
+ALTER TABLE `tb_visita_morador`
+  ADD PRIMARY KEY (`id_visita_morador`),
+  ADD KEY `id_morador` (`id_morador`),
+  ADD KEY `id_visitante` (`id_visitante`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `tb_apartamento`
+--
+ALTER TABLE `tb_apartamento`
+  MODIFY `id_apartamento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_bloco`
+--
+ALTER TABLE `tb_bloco`
+  MODIFY `id_bloco` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_espacos`
+--
+ALTER TABLE `tb_espacos`
+  MODIFY `id_espacos` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_funcionario`
+--
+ALTER TABLE `tb_funcionario`
+  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de tabela `tb_img_funcionario`
+--
+ALTER TABLE `tb_img_funcionario`
+  MODIFY `id_imagem` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `tb_img_morador`
+--
+ALTER TABLE `tb_img_morador`
+  MODIFY `id_imagem` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_morador`
+--
+ALTER TABLE `tb_morador`
+  MODIFY `id_morador` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_morador_apartamento`
+--
+ALTER TABLE `tb_morador_apartamento`
+  MODIFY `id_morador_apartamento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_mov_morador`
+--
+ALTER TABLE `tb_mov_morador`
+  MODIFY `id_movimentaçao` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_reserva`
+--
+ALTER TABLE `tb_reserva`
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_tipo_visita`
+--
+ALTER TABLE `tb_tipo_visita`
+  MODIFY `id_tipo_visita` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_usuario`
+--
+ALTER TABLE `tb_usuario`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `tb_veiculo`
+--
+ALTER TABLE `tb_veiculo`
+  MODIFY `id_veiculo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_visitante`
+--
+ALTER TABLE `tb_visitante`
+  MODIFY `id_visitante` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_visita_morador`
+--
+ALTER TABLE `tb_visita_morador`
+  MODIFY `id_visita_morador` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `tb_apartamento`
+--
+ALTER TABLE `tb_apartamento`
+  ADD CONSTRAINT `tb_apartamento_ibfk_1` FOREIGN KEY (`id_bloco`) REFERENCES `tb_bloco` (`id_bloco`);
+
+--
+-- Limitadores para a tabela `tb_espacos`
+--
+ALTER TABLE `tb_espacos`
+  ADD CONSTRAINT `tb_espacos_ibfk_1` FOREIGN KEY (`id_bloco`) REFERENCES `tb_bloco` (`id_bloco`);
+
+--
+-- Limitadores para a tabela `tb_img_funcionario`
+--
+ALTER TABLE `tb_img_funcionario`
+  ADD CONSTRAINT `tb_img_funcionario_ibfk_1` FOREIGN KEY (`id_funcionario`) REFERENCES `tb_funcionario` (`id_funcionario`);
+
+--
+-- Limitadores para a tabela `tb_img_morador`
+--
+ALTER TABLE `tb_img_morador`
+  ADD CONSTRAINT `tb_img_morador_ibfk_1` FOREIGN KEY (`id_morador`) REFERENCES `tb_morador` (`id_morador`);
+
+--
+-- Limitadores para a tabela `tb_morador`
+--
+ALTER TABLE `tb_morador`
+  ADD CONSTRAINT `tb_morador_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`),
+  ADD CONSTRAINT `tb_morador_ibfk_2` FOREIGN KEY (`id_status`) REFERENCES `tb_status` (`id_status`);
+
+--
+-- Limitadores para a tabela `tb_morador_apartamento`
+--
+ALTER TABLE `tb_morador_apartamento`
+  ADD CONSTRAINT `tb_morador_apartamento_ibfk_1` FOREIGN KEY (`id_morador`) REFERENCES `tb_morador` (`id_morador`),
+  ADD CONSTRAINT `tb_morador_apartamento_ibfk_2` FOREIGN KEY (`id_apartamento`) REFERENCES `tb_apartamento` (`id_apartamento`);
+
+--
+-- Limitadores para a tabela `tb_mov_morador`
+--
+ALTER TABLE `tb_mov_morador`
+  ADD CONSTRAINT `tb_mov_morador_ibfk_1` FOREIGN KEY (`id_morador`) REFERENCES `tb_morador` (`id_morador`);
+
+--
+-- Limitadores para a tabela `tb_reserva`
+--
+ALTER TABLE `tb_reserva`
+  ADD CONSTRAINT `tb_reserva_ibfk_1` FOREIGN KEY (`id_espaco`) REFERENCES `tb_espacos` (`id_espacos`),
+  ADD CONSTRAINT `tb_reserva_ibfk_2` FOREIGN KEY (`id_morador`) REFERENCES `tb_morador` (`id_morador`),
+  ADD CONSTRAINT `tb_reserva_ibfk_3` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`);
+
+--
+-- Limitadores para a tabela `tb_tipo_visita`
+--
+ALTER TABLE `tb_tipo_visita`
+  ADD CONSTRAINT `tb_tipo_visita_ibfk_1` FOREIGN KEY (`id_visitante`) REFERENCES `tb_visitante` (`id_visitante`);
+
+--
+-- Limitadores para a tabela `tb_usuario`
+--
+ALTER TABLE `tb_usuario`
+  ADD CONSTRAINT `tb_usuario_ibfk_1` FOREIGN KEY (`id_funcionario`) REFERENCES `tb_funcionario` (`id_funcionario`);
+
+--
+-- Limitadores para a tabela `tb_veiculo`
+--
+ALTER TABLE `tb_veiculo`
+  ADD CONSTRAINT `tb_veiculo_ibfk_1` FOREIGN KEY (`id_morador`) REFERENCES `tb_morador` (`id_morador`);
+
+--
+-- Limitadores para a tabela `tb_visitante`
+--
+ALTER TABLE `tb_visitante`
+  ADD CONSTRAINT `tb_visitante_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`),
+  ADD CONSTRAINT `tb_visitante_ibfk_2` FOREIGN KEY (`id_status`) REFERENCES `tb_status` (`id_status`);
+
+--
+-- Limitadores para a tabela `tb_visita_morador`
+--
+ALTER TABLE `tb_visita_morador`
+  ADD CONSTRAINT `tb_visita_morador_ibfk_1` FOREIGN KEY (`id_morador`) REFERENCES `tb_morador` (`id_morador`),
+  ADD CONSTRAINT `tb_visita_morador_ibfk_2` FOREIGN KEY (`id_visitante`) REFERENCES `tb_visitante` (`id_visitante`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt">
   <head>
@@ -55,7 +58,7 @@
                     </li>
                     <li><a href="../principal.php">Menu Principal</a></li>
                     <li class="dropdown" >
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <a href="../controller/sair.php" class="dropdown-toggle" data-toggle="dropdown">
                         Sair</a>
                     </li>
                   </ul>

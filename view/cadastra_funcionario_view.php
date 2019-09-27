@@ -95,11 +95,7 @@
             <label class="col-md-1 control-label"></label>
 
             <div class="col-sm-2">
-        <input type="hidden" name="MAX_FILE_SIZE" value="99999999" />
                 <div><input name="imagem" type="file" /></div>
-                
-
-
             </div>
           </div>
 

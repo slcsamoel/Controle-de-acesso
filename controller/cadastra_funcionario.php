@@ -15,56 +15,53 @@ $class_funcionario->setTurno($turno = $_POST['turno']);
 
 // variaveis para imagem
 
-
+            //inserindo 
     function cadastra_funcionario($link, $nome, $cpf , $dt_nascimento , $sexo , $rg , $telefone , $turno ){
         $sql =" INSERT INTO tb_funcionario(cpf,nome,rg,turno,sexo,telefone,id_status,dt_nascimento) VAlUES('$cpf','$nome', $rg,'$turno','$sexo','$telefone' ,1,'$dt_nascimento')";
 
         $resul_insert = mysqli_query($link,$sql);
         
         if($resul_insert){
-
-            $imagem = $_FILES['imagem']['tmp_name'];
-             $tamanho = $_FILES['imagem']['size'];
-             $tipo = $_FILES['imagem']['type'];
-             $nome_foto = $_FILES['imagem']['name'];
-
-             $dados_funcionario = buscar_funcionario($link,$cpf);
-
-            insere_imagem($link,$imagem,$tamanho,$tipo,$nome_foto,$dados_funcionario['id_funcionario']);
-            echo ('<br>'); 
-            echo "cadastro realizado com sucessso";
-        }else{ 
-            echo('Não foi possivel fazer o cadastro');
-        }   
-}
-cadastra_funcionario($link, $nome, $cpf , $dt_nascimento , $sexo , $rg , $telefone ,$turno);
-
-
-function insere_imagem($link,$imagem,$tamanho, $tipo,$nome_foto, $id_funcionario){
-
+                //inserindo imagem 
+                $dados_funcionario = buscar_funcionario($link,$cpf);
+                $id_funcionario = $dados_funcionario['id_funcionario'];
        
-    if($imagem !="none"){
+            if(isset($_FILES['imagem'])){
+            $extensao = explode('.',$_FILES['imagem']['name']);
+            $extensao = strtolower(end($extensao));
+            $imagem = md5(time()).$extensao; 
+            $diretorio = '../fotos_funcionarios/';   
+             
+            move_uploaded_file( $_FILES['imagem']['tmp_name'], $diretorio.$imagem);
+                   
+          $sql_foto = "INSERT INTO tb_img_funcionario(id_funcionario , imagem)VALUES( $id_funcionario,'$imagem')";
+                $result_foto = mysqli_query($link,$sql_foto);
 
-      $fp = fopen($imagem,"rb");
-      $conteudo = fread($fp,$tamanho);
-      $conteudo = addslashes($conteudo);
-       fclose($fp);
+                if($result_foto){
 
-       $sql_insercao = " INSERT INTO tb_img_funcionario(id_funcionario,nome,tamanho,tipo,imagem)VAlUES($id_funcionario,'$nome_foto','$tamanho', '$tipo','$conteudo')";
-       
-      mysqli_query($link ,$sql_insercao)or die("algo deu errado ao tenta inseri a foto");
-      
-      
-       echo 'foto inserida com sucesso';
+                    echo 'foto cadastrada com sucesso';
 
-     }else{
-         echo ('<br>');
+                }else{
 
-         echo 'não foi possivel inseri a imagem';
-     }
+                    echo 'foto não cadastrada';
+                }
 
+            }
+
+         
+
+                 echo 'Cadastro realizado com sucesso';  
+                
+        }else{
+        echo 'cadastro não realizado';     
+        }
 
     }
+        cadastra_funcionario($link, $nome, $cpf , $dt_nascimento , $sexo , $rg , $telefone ,$turno);
+
+
+
+        
 
     
-   ?> 
+
