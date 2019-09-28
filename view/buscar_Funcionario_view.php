@@ -32,8 +32,9 @@
 
             </div>
             <div class="col-md-2">
-              <button type="submit" class="btn btn-primary" value="buscar">Buscar
-              </button>
+            
+              <button type="submit" class="btn btn-primary" value="buscar">Buscar </button>
+           
             </div>
 
           </div>
