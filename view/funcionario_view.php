@@ -103,7 +103,9 @@
             <div class="col-md-1">
             </div>
             <div class="col-md-2">
-              <button type="button" class="btn btn-primary">Altera senha de usuario</button>
+            <a href="cadastra_usuario_view.php">
+              <button type="button" class="btn btn-primary">Cadastra Usuario</button>
+              </a>
             </div>
             <div class="col-md-5">
             </div>
