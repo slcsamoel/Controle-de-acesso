@@ -1,6 +1,6 @@
 <?php require_once "../cabecalho_aux.php";?>
 
-<title>formulario_morado</title>
+<title>formulario_morador</title>
 
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/estilo.css" rel="stylesheet">

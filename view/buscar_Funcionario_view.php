@@ -1,4 +1,6 @@
-<?php require_once "../cabecalho_aux.php";?>
+<?php 
+
+require_once "../cabecalho_aux.php";?>
 <title>buscar_funcionario</title>
 
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">

@@ -1,4 +1,5 @@
-<?php require_once "../cabecalho_aux.php";?>
+<?php require_once "../cabecalho_aux.php";
+require_once('../controller/conexao_banco.php');?>
 <title>buscar_reserva</title>
 
 <!-- Bootstrap -->
@@ -11,7 +12,7 @@
   <div class="row">
     <div class="col-sm-12">
 
-      <form class="form-horizontal">
+      <form class="form-horizontal" method="POST" action="../controller/buscar_reserva.php">
 
         <div class="panel panel-primary">
 
@@ -23,26 +24,29 @@
             <label class="col-md-2 control-label" for="torre">Torre<h11></h11></label>
             <div class="col-md-2">
               <select required id="torre" name="torre" class="form-control">
-                <option value=""></option>
-                <option value="1"><h3>1</h3></option>
-                <option value="2"><h3>2</h3></option>
-                <option value="3"><h3>3</h3></option>
-                <option value="4"><h3>4</h3></option>
+              <option value=""></option>
+               <?php 
+                $buscaTorre  = mysqli_query($link, "SELECT descricao_bloco, id_bloco FROM tb_bloco "); 
+                $arrayTorres = $buscaTorre->fetch_all();
+                foreach($arrayTorres as $key => $value):
+                  echo '<option value="'.$value[1].'">'.$value[0].'</option>'; 
+                endforeach;
+                ?>
               </select>
             </div>
 
             <!-- Prepended checkbox -->
-            <label class="col-md-2 control-label" for="torre">Espaços<h11></h11></label>
+            <label class="col-md-2 control-label" for="espacos">Espaços<h11></h11></label>
             <div class="col-md-2">
-              <select required id="torre" name="torre" class="form-control">
+              <select required id="espacos" name="espacos" class="form-control">
                <option value="1"><h2>Currasqueira</h2></option>
                <option value="2"><h2>Salão de festas</h2></option>
                
              </select>
            </div>
-           <label class="col-md-2 control-label" for="Nome">Data Evento<h11>*</h11></label>  
+           <label class="col-md-2 control-label" for="dtEvento">Data Evento<h11>*</h11></label>  
            <div class="col-md-2">
-            <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+            <input id="dtEvento" name="dtEvento" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
           </div>
 
         </div>
@@ -66,7 +70,7 @@
 
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-primary">Buscar
+          <button type="submit" class="btn btn-primary">Buscar
           </button>
         </div>
 

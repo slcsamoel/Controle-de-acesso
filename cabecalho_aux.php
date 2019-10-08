@@ -1,5 +1,8 @@
 <?php
 session_start();
+$id_usuario = $_SESSION['id_usuario'];
+$usuario = $_SESSION['usuario'];
+$id_nivel_acesso = $_SESSION['id_nivel_acesso'];
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -8,7 +11,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Barra de navegação aparecera em todas as telas do sistema  -->
-    <title>Navegação</title>
+    <title>Controle de Acesso</title>
 
     <!-- Bootstrap -->
     
@@ -57,7 +60,7 @@ session_start();
 
                     </li>
                     <li><a href="../principal.php">Menu Principal</a></li>
-                    <li class="dropdown" >
+                    <li>
                       <a href="../controller/sair.php" class="dropdown-toggle" data-toggle="dropdown">
                         Sair</a>
                     </li>

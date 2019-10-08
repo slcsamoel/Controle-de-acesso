@@ -11,10 +11,9 @@
   <div class="row">
     <div class="col-sm-12">
 
-      <form class="form-horizontal">
+      <form class="form-horizontal" enctype="multipart/form-data" action="../controller/cadastra_morador.php" method="post" >
 
         <div class="panel panel-primary">
-
 
           <div class="panel-body">
             <div class="form-group">  
@@ -25,22 +24,34 @@
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-2 control-label" for="Nome">Nome <h11>*</h11></label>  
+              <label class="col-md-2 control-label" for="nome">Nome <h11>*</h11></label>  
               <div class="col-md-8">
-                <input id="Nome" name="Nome" placeholder="" class="form-control input-md" required="" type="text">
+                <input id="nome" name="nome" placeholder="" class="form-control input-md" required="" type="text">
               </div>
             </div>
 
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="nome_mae">Nome da Mãe<h11>*</h11></label>  
+              <div class="col-md-4">
+                <input id="nome_mae" name="nome_mae" placeholder="" class="form-control input-md" required="" type="text">
+              </div>
+              <label class="col-md-2 control-label" for="nome_pai">Nome da Pai<h11>*</h11></label>  
+              <div class="col-md-4">
+                <input id="nome_pai" name="nome_pai" placeholder="" class="form-control input-md" required="" type="text">
+              </div>
+            </div>
+
+
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-2 control-label" for="Nome">CPF <h11>*</h11></label>  
+              <label class="col-md-2 control-label" for="cpf">CPF <h11>*</h11></label>  
               <div class="col-md-2">
                 <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
               </div>
 
-              <label class="col-md-1 control-label" for="Nome">Nascimento<h11>*</h11></label>  
+              <label class="col-md-1 control-label" for="dt_nascimento">Nascimento<h11>*</h11></label>  
               <div class="col-md-2">
-                <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+                <input id="dt_nascimento" name="dt_nascimento" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date"  onBlur="showhide()">
               </div>
 
               <!-- Multiple Radios (inline) -->
@@ -60,64 +71,62 @@
 
             <!-- Prepended text-->
             <div class="form-group">
-              <label class="col-md-2 control-label" for="Nome">RG <h11>*</h11></label>  
+              <label class="col-md-2 control-label" for="rg">RG <h11>*</h11></label>  
               <div class="col-md-2">
-                <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
+                <input id="rg" name="rg" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
               </div>
 
-              <label class="col-md-1 control-label" for="prependedtext">Telefone</label>
+              <label class="col-md-1 control-label" for="telefone">Telefone</label>
               <div class="col-md-2">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                  <input id="prependedtext" name="prependedtext" class="form-control" placeholder="XX XXXXX-XXXX" type="text" maxlength="13"  pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
+                  <input id="telefone" name="telefone" class="form-control"  type="text" maxlength="13"  pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
                   OnKeyPress="formatar('## #####-####', this)">
                 </div>
               </div>
             </div> 
-
-            <!-- Prepended text-->
           </div>
 
-          <label class="col-md-2 control-label" for="Nome">Data Cadastro<h11>*</h11></label>  
-          <div class="col-md-2">
-            <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
-          </div>
-
-
-          <!-- Search input-->
           <div class="form-group">
-            <label class="col-md-2 control-label" for="CEP">Placa <h11>*</h11></label>
+            <label class="col-md-2 control-label" for="placa">Placa <h11>*</h11></label>
             <div class="col-md-2">
-              <input id="cep" name="placa" placeholder="letra e numeros" class="form-control input-md" required="" value="" >
+              <input id="placa" name="placa" placeholder="letra e numeros" class="form-control input-md" maxlength="7">
             </div>
 
-          </div>
-
-          <!-- Prepended text-->
-          <div class="form-group">
             <label class="col-md-2 control-label" for="prependedtext">Apartamento</label>
             <div class="col-md-2">
               <div class="input-group">
-                <span class="input-group-addon">Torre <h11>*</h11></span>
-                <input id="numero" name="numero" class="form-control" placeholder="" required=""  type="text">
+                <span class="input-group-addon">Bloco <h11>*</h11></span>
+                <select required id="bloco" name="bloco" class="form-control">
+                <option value=""></option>   
+              <option value="1">Bloco-1</option>
+              <option value="2">Bloco-2</option>
+              <option value="3">Bloco-3</option>
+              <option value="4">Bloco-4</option>
+            </select>
               </div>
-
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
              <div class="input-group">
               <span class="input-group-addon">Numero<h11>*</h11></span>
-              <input id="numero" name="numero" class="form-control" placeholder="" required=""  type="text">
+              <input id="nr_apartamento" name="nr_apartamento" class="form-control" placeholder="" required=""  type="number">
             </div>
 
           </div>
+
+            </div>      
+
+          <!-- Prepended text-->
+          <div class="form-group">
         </div>
 
         <!-- Select Basic -->
         <div class="form-group">
-          <label class="col-md-2 control-label" for="Estado Civil">Tipo de Morador <h11>*</h11></label>
+          <label class="col-md-2 control-label" for="tipo_morador">Tipo de Morador<h11>*</h11></label>
           <div class="col-md-2">
-            <select required id="Estado Civil" name="Estado Civil" class="form-control">
+            <select required id="tipo_morador" name="tipo_morador" class="form-control">
+            <option value=""></option>
               <option value="Propietario">Propietario</option>
               <option value="Locatario">Locatario</option>
             </select>
@@ -125,18 +134,14 @@
         </div>
 
         <br>
-        <!-- Select Basic -->
+
         <div class="form-group">
-
+        <label class="col-md-2 control-label">Inserir Foto<h11>*</h11></label>
+          <div class="col-md-4">
+          <input name="imagem" type="file" class=" form-control-file " />
+        </div>
           <div class="col-md-2">
-          </div>
-          <div class="col-md-2">
-            <button type="button" class="btn btn-primary">Cadastrar</button>
-          </div>
-          <div class="col-sm-2">
-            <img src="../imagens/img_morador.png" class= "img-responsive img-thumbnail">
-          </div>
-
+            <button type="submit" class="btn btn-primary" value="salvar" >Salvar</button>
            </div>
       </div>
     </form>

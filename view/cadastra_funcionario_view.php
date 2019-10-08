@@ -1,10 +1,16 @@
-<?php require_once "../cabecalho_aux.php"; ?>
+<?php
+
+require_once "../cabecalho_aux.php"; ?>
 
 <title>formulario_morado</title>
 
 <!-- Bootstrap -->
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/estilo.css" rel="stylesheet">
+
+<script>
+
+</script>
 
 <div class="container">
   <div class="pager-header">
@@ -64,11 +70,20 @@
               <div class="col-md-2">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                  <input id="telefone" name="telefone" class="form-control" placeholder="XX XXXXX-XXXX" type="text" maxlength="13" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$" OnKeyPress="formatar('## #####-####', this)">
+                  <input id="telefone" name="telefone" class="form-control" OnKeyPress="formatar('##-#####-####', this)" type="text" maxlength="13" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$" OnKeyPress="formatar('## #####-####', this)">
                 </div>
               </div>
-            </div>
+              <label class="col-md-2 control-label" for="id_funcao">Função<h11>*</h11></label>
+              <div class="col-md-2">
+                <select required id="id_funcao" name="id_funcao" class="form-control">
+                  <option value=""></option>
+                  <option value="1">Porteiro(a)</option>
+                  <option value="2">Zelador(a)</option>
+                  <option value="3">Faxineiro(a)</option>
+                </select>
+              </div>
 
+            </div>
 
           </div>
           <div class="form-group">
@@ -95,7 +110,7 @@
             <label class="col-md-1 control-label"></label>
 
             <div class="col-sm-2">
-                <div><input name="imagem" type="file" /></div>
+              <div><input name="imagem" type="file" /></div>
             </div>
           </div>
 
@@ -105,8 +120,9 @@
             </div>
 
             <div class="col-md-1">
-
-            </div>
+            <a type="button" class="btn btn-primary " href="../principal.php"> 
+              Voltar
+            </a></div>
             <div class="col-md-1">
             </div>
 

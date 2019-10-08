@@ -1,4 +1,6 @@
-<?php require_once "../cabecalho_aux.php";?>
+<?php 
+
+require_once "../cabecalho_aux.php";?>
 <title>buscar_visitantes</title>
 
 <!-- Bootstrap -->

@@ -8,20 +8,20 @@ class Pessoa
     private $dt_nascimento;
     private $sexo;
     private $rg;
-    private $dt_cadastro;
-    
+    private $id_status;
+
     public function getDt_nascimento()
     {
         return $this->dt_nascimento;
     }
-    
+
     public function setDt_nascimento($dt_nascimento)
     {
         $this->dt_nascimento = $dt_nascimento;
 
         return $this;
     }
-   
+
     public function getId()
     {
         return $this->id;
@@ -51,7 +51,7 @@ class Pessoa
         return $this->cpf;
     }
 
-   
+
     public function setCpf($cpf)
     {
         $this->cpf = $cpf;
@@ -82,18 +82,16 @@ class Pessoa
 
         return $this;
     }
-    public function getDt_cadastro()
+
+    public function getId_status()
     {
-        return $this->dt_cadastro;
+        return $this->id_status;
     }
-    
-    public function setDt_cadastro($dt_cadastro)
+
+    public function setId_status($id_status)
     {
-        $this->dt_cadastro = $dt_cadastro;
+        $this->id_status = $id_status;
 
         return $this;
     }
-   
-
-    
 }

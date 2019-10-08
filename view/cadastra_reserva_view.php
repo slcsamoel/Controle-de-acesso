@@ -1,4 +1,7 @@
-<?php require_once "../cabecalho_aux.php";?>
+<?php require_once "../cabecalho_aux.php";
+require_once('../controller/conexao_banco.php');
+
+?>
 <title>Cadastra_reserva</title>
 
 <!-- Bootstrap -->
@@ -12,7 +15,7 @@
   <div class="row">
     <div class="col-sm-12">
 
-      <form class="form-horizontal">
+      <form class="form-horizontal" method="POST" action="../controller/cadastrar_reserva.php" >
 
         <div class="panel panel-primary">     
           <div class="panel-body">
@@ -22,20 +25,28 @@
             <div class="col-md-2">
               <select required id="torre" name="torre" class="form-control">
                 <option value=""></option>
-                <option value="1"><h3>1</h3></option>
-                <option value="2"><h3>2</h3></option>
-                <option value="3"><h3>3</h3></option>
-                <option value="4"><h3>4</h3></option>
+                <?php 
+                $buscaTorre  = mysqli_query($link, "SELECT descricao_bloco, id_bloco FROM tb_bloco "); 
+                $arrayTorres = $buscaTorre->fetch_all();
+                foreach($arrayTorres as $key => $value):
+                  echo '<option value="'.$value[1].'">'.$value[0].'</option>'; 
+                endforeach;
+                ?>
               </select>
             </div>
 
             <!-- Prepended checkbox -->
-            <label class="col-md-2 control-label" for="torre">Espaços<h11></h11></label>
+            <label class="col-md-2 control-label" for="espacos">Espaços<h11></h11></label>
             <div class="col-md-2">
-              <select required id="torre" name="torre" class="form-control">
+              <select required id="espacos" name="espacos" class="form-control">
                 <option value=""></option>
-                <option value="1"><h2>Currasqueira</h2></option>
-                <option value="2"><h2>Salão de festas</h2></option>
+                <?php 
+                $buscaEspacos  = mysqli_query($link, "SELECT descricao_espaco, id_espacos FROM tb_espacos "); 
+                $arrayEspacos = $buscaEspacos->fetch_all();
+                foreach($arrayEspacos as $key => $value):
+                  echo '<option value="'.$value[1].'">'.$value[0].'</option>'; 
+                endforeach;
+                ?>
               </select>
             </div>
 
@@ -43,28 +54,26 @@
 
 
           <div class="form-group">
-        
-              <div class="col-md-11 control-label">
-
-                <label class="col-md-2 control-label" for="cpf">ID <h11></h11></label>  
+    
+                <label class="col-md-2 control-label" for="id_morador">Código Morador<h11></h11></label>  
                 <div class="col-md-2">
-                  <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
+                  <input id="id_morador" name="id_morador" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
                 </div>
 
 
-                <label class="col-md-2 control-label" for="Nome">Evento<h11></h11></label>  
+                <label class="col-md-2 control-label" for="evento">Evento<h11></h11></label>  
                 <div class="col-md-2">
-                  <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
+                  <input id="evento" name="evento"  class="form-control input-md" required="" type="text" maxlength="11" >
                 </div>
 
 
-                <label class="col-md-2 control-label" for="Nome">Data Evento<h11>*</h11></label>  
+                <label class="col-md-2 control-label" for="data_reserva">Data Evento<h11>*</h11></label>  
                 <div class="col-md-2">
-                  <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+                  <input id="data_reserva" name="data_reserva" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
                 </div>
 
               </div>
-            </div>
+    
             <div class="form-group">
 
             </div>
@@ -76,7 +85,7 @@
 
             </div>
             <div class="col-md-2">
-              <button type="button" class="btn btn-primary">Cadastrar
+              <button type="submit" class="btn btn-primary">Cadastrar
               </button>
             </div>
 
@@ -89,5 +98,5 @@
       </div>
 
     </div>
-
+              </form>
      <?php require_once "../rodape.php";?>
