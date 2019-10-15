@@ -2,7 +2,7 @@
 
 require_once "../cabecalho_aux.php"; ?>
 
-<title>formulario_morado</title>
+<title>Cadastra_morador</title>
 
 <!-- Bootstrap -->
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">

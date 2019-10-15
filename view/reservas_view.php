@@ -35,24 +35,52 @@ $data_reserva = $_GET['dtEvento'];
           <div class="panel-body">
            <div class="form-group">
             <label class="col-md-1 control-label" for="prependedtext">Local</label>
+
+            
             <div class="col-md-2">
               <div class="input-group">
-                <span class="input-group-addon">Torre <h11>*</h11></span>
-                <input id="torre" name="torre" class="form-control" placeholder="" required="" value="<?php echo($row_usuario['descricao_bloco'])?>"  type="text">
+                <span class="input-group-addon">Bloco<h11>*</h11></span>
+                <select required id="id_bloco" name="id_bloco" class="form-control" value="<?php echo($row_usuario['id_bloco'])?>">
+                <option value="<?php echo($row_usuario['id_bloco'])?>"></option>   
+              <option value="1">Bloco-A</option>
+              <option value="2">Bloco-B</option>
+              <option value="3">Bloco-C</option>
+              <option value="4">Bloco-D</option>
+              <option value="5">Bloco-E</option>
+              <option value="6">Bloco-F</option>
+            </select>
               </div>
             </div>
+
             <div class="col-md-3">
              <div class="input-group">
               <span class="input-group-addon">Espaço<h11>*</h11></span>
-              <input id="espacos" name="espacos" class="form-control" placeholder="" required=""  value="<?php echo($row_usuario['descricao_espaco'])?>" type="text">
+              <select required id="id_espaco" name="id_espaco" class="form-control">
+                <option value="<?php echo($row_usuario['id_espaco'])?>"></option>   
+              <option value="1">Churrasqueira</option>
+              <option value="2">Salao de Festa</option>
+            </select>
             </div>
-
           </div>
+
+          <div class="col-md-3">
+             <div class="input-group">
+              <span class="input-group-addon">Status<h11>*</h11></span>
+              <select required id="id_status_reserva" name="id_status_reserva" class="form-control">
+                <option value="<?php //echo($row_usuario[])?>"></option>   
+              <option value="1">ATIVA</option>
+              <option value="2">CANCELADA</option>
+            </select>
+            </div>
+          </div>
+
+
+
         </div>
         <div class="form-group">     
-              <div class="col-md-11 control-label">
-               <label class="col-md-1 control-label" for="id_morador">ID <h11></h11></label>  
-                <div class="col-md-2">
+          
+               <label class="col-md-2 control-label" for="id_morador">Código de Acesso:<h11></h11></label>  
+                <div class="col-md-1">
                   <input id="id_morador" name="id_morador" placeholder="Apenas números" value="<?php echo($row_usuario['id_morador'])?>" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
                 </div>
                 <label class="col-md-2 control-label" for="evento">Evento<h11></h11></label>  
@@ -64,7 +92,6 @@ $data_reserva = $_GET['dtEvento'];
                   <input id="dtEvento" name="dtEvento" placeholder="DD/MM/AAAA" value="<?php echo($row_usuario['dt_reserva'])?>" class="form-control input-md" required="" type="date" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
                 </div>
 
-              </div>
             </div>
         <div class="form-group">
 
@@ -73,14 +100,14 @@ $data_reserva = $_GET['dtEvento'];
                 <input id="nome" name="nome" placeholder="" class="form-control input-md" value="<?php echo($row_usuario['nome'])?>" required="" type="text" disabled>
               </div>
 
+          <div class="col-md-3">
+          </div>
+
           <div class="col-md-1">
-            <button type="submit" class="btn btn-primary">Altera</button>
+            <button type="submit" class="btn btn-primary">Voltar</button>
           </div>
           <div class="col-md-1">
-            <button type="button" class="btn btn-primary">Excluir</button>
-          </div>
-          <div class="col-md-1">
-            <button type="button" class="btn btn-primary">Novo</button>
+            <button type="button" class="btn btn-primary">Salvar</button>
           </div>
         </div>
         </div>

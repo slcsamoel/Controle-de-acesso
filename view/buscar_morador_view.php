@@ -1,6 +1,5 @@
 
 <?php 
-
 require_once "../cabecalho_aux.php";?>
 <title>buscar_morador</title>
 
@@ -28,7 +27,7 @@ require_once "../cabecalho_aux.php";?>
 
                 <label class="col-md-2 control-label" for="">Codigo de Acesso<h11></h11></label>  
                 <div class="col-md-2">
-                  <input id="id" name="id"  class="form-control input-md" required="" type="text" maxlength="10" pattern="[0-9]+$">
+                  <input id="id_morador" name="id_morador"  class="form-control input-md" type="text" maxlength="10" pattern="[0-9]+$">
                 </div>
 
 

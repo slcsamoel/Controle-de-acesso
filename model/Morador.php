@@ -1,15 +1,14 @@
 <?php
 include_once('Pessoa.php');
 
-class Morador extends Pessoa{
-    
+class Morador extends Pessoa
+{
+
 
     private $nome_mae;
     private $nome_pai;
     private $telefone;
     private $placa;
-    private $torre;
-    private $nr_apartamento;
     private $tipo_morador;
 
     public function getTipo_morador()
@@ -26,24 +25,12 @@ class Morador extends Pessoa{
     }
 
 
-    public function getNr_apartamento()
-    {
-        return $this->nr_apartamento;
-    }
-
-  
-    public function setNr_apartamento($nr_apartamento){
-        $this->nr_apartamento = $nr_apartamento;
-
-        return $this;
-    }
-
-    public function getNome_mae()
+     public function getNome_mae()
     {
         return $this->nome_mae;
     }
 
-   
+
     public function setNome_mae($nome_mae)
     {
         $this->nome_mae = $nome_mae;
@@ -52,7 +39,8 @@ class Morador extends Pessoa{
     }
 
 
-    public function getNome_pai(){
+    public function getNome_pai()
+    {
         return $this->nome_pai;
     }
 
@@ -64,7 +52,7 @@ class Morador extends Pessoa{
         return $this;
     }
 
-    
+
     public function getTelefone()
     {
         return $this->telefone;
@@ -83,7 +71,7 @@ class Morador extends Pessoa{
         return $this->placa;
     }
 
-  
+
     public function setPlaca($placa)
     {
         $this->placa = $placa;
@@ -92,26 +80,12 @@ class Morador extends Pessoa{
     }
 
 
-    public function getTorre()
-    {
-        return $this->torre;
-    }
-
-
-    public function setTorre($torre)
-    {
-        $this->torre = $torre;
-
-        return $this;
-    }
-
-   
     public function getData_cadastro()
     {
         return $this->data_cadastro;
     }
 
-   
+
     public function setData_cadastro($data_cadastro)
     {
         $this->data_cadastro = $data_cadastro;
@@ -121,37 +95,44 @@ class Morador extends Pessoa{
 
 
 
-    function buscar_morador($link, $id ,$nome){
-        $sql = "SELECT * fROM tb_morador  WHERE cpf ='$id' OR LIKE %$nome% ";
+    function buscar_cadastro($link, $cpf)
+    {
+        $sql = "SELECT * fROM tb_morador  WHERE cpf ='$cpf'";
         $result_select = mysqli_query($link, $sql);
         if ($result_select) {
-          $morador = mysqli_fetch_array($result_select);  
+            $cadastro = mysqli_fetch_array($result_select);
         } else {
-            echo  "<script>alert('Erro na Consulta');</script>"; 
+            echo  "<script>alert('Erro na Consulta');</script>";
         }
-        return $morador;
-        
-      }
-
-      
-      function cadastra_morador($link, $nome, $cpf , $dt_nascimento , $sexo , $rg , $telefone,$nome_mae , $nome_pai, $tipo_morador , $id_usuario  ){
-
-        $sql =" INSERT INTO tb_morador(cpf,nome,nome_mae,nome_pai,rg,dt_nascimento,sexo,dt_cadastro,tipo_morador,id_usuario,telefone,id_status)";
-       $sql.= "VAlUES('$cpf','$nome', '$nome_mae','$nome_pai','$rg','$dt_nascimento','$sexo','$tipo_morador',$id_usuario,'$telefone', 1)";            
-        $result_insert = mysqli_query($link,$sql);
-            $cadastrado = false;
-        if($result_insert){
-            $cadastrado = true;
-        }else{
-            echo  "<script>alert('Erro na query de cadastro');</script>";
-            echo "<script>window.location = '../view/cadastra_Morador_view.php';</script>";
-
-              }
-             return $cadastrado;   
+        return $cadastro; 
     }
 
 
-
+    function cadastra_morador($link, $nome, $cpf, $dt_nascimento, $sexo, $rg, $telefone, $nome_mae, $nome_pai, $tipo_morador, $id_usuario, $id_apartamento)
+    {
+        $sql = "INSERT INTO tb_morador(cpf,nome,nome_mae,nome_pai,rg,dt_nascimento,sexo,tipo_morador,id_usuario,telefone,id_apartamento,id_status) 
+        VAlUES('$cpf','$nome', '$nome_mae','$nome_pai',$rg,'$dt_nascimento','$sexo','$tipo_morador',$id_usuario,'$telefone',$id_apartamento, 1)";
+        $result_insert = mysqli_query($link, $sql);
+        $cadastrado = false;
+        if ($result_insert) {
+            $cadastrado = true;
+        } else {
+            echo  "<script>alert('Erro na query de cadastro');</script>";
+            //echo "<script>window.location = '../view/cadastra_morador_view.php';</script>";
+        }
+        return $cadastrado;
+    }
+    function buscar_morador($link, $id_morador ,$nome)
+    {
+        $sql = "SELECT * fROM tb_morador  WHERE id_morador ='$id_morador' OR nome LIKE '%$nome%'";
+        $result_select = mysqli_query($link, $sql);
+        if ($result_select) {
+            $cadastro = mysqli_fetch_array($result_select);
+        } else {
+            echo  "<script>alert('Erro na Consulta');</script>";
+        }
+        return $cadastro; 
+    }
 
 
 }

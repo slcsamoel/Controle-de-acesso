@@ -39,6 +39,7 @@ require_once('../controller/conexao_banco.php');?>
             <label class="col-md-2 control-label" for="espacos">Espaços<h11></h11></label>
             <div class="col-md-2">
               <select required id="espacos" name="espacos" class="form-control">
+              <option value="1"><h2></h2></option>
                <option value="1"><h2>Currasqueira</h2></option>
                <option value="2"><h2>Salão de festas</h2></option>
                
@@ -51,24 +52,26 @@ require_once('../controller/conexao_banco.php');?>
 
         </div>
 
-
-        <div class="form-group">
-
-
-        </div>
-
         <div class="form-group">
 
         </div>
-
-
-        <div class="col-md-10">
-
-          <div class="col-md-10">
-
-          </div>
-
+        <div class="form-group">
+        <div class="col-md-2">
         </div>
+
+        <div class="col-md-3">
+             <div class="input-group">
+              <span class="input-group-addon">Status<h11>*</h11></span>
+              <select required id="id_status_reserva" name="id_status_reserva" class="form-control">
+              <option value="1">ATIVA</option>
+              <option value="2">CANCELADA</option>
+            </select>
+            </div>
+          </div>     
+          <div class="col-md-5">
+        </div>
+
+
         <div class="col-md-2">
           <button type="submit" class="btn btn-primary">Buscar
           </button>

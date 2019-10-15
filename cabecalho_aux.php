@@ -1,8 +1,9 @@
 <?php
 session_start();
-$id_usuario = $_SESSION['id_usuario'];
-$usuario = $_SESSION['usuario'];
-$id_nivel_acesso = $_SESSION['id_nivel_acesso'];
+if (!isset($_SESSION["usuario"]))header("Location: index.php?erro=1");
+$id_usuario = $_SESSION["id_usuario"];
+$usuario = $_SESSION["usuario"];
+$id_nivel_acesso = $_SESSION["id_nivel_acesso"];
 ?>
 <!DOCTYPE html>
 <html lang="pt">

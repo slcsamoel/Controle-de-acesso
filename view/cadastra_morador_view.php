@@ -88,21 +88,27 @@
           </div>
 
           <div class="form-group">
-            <label class="col-md-2 control-label" for="placa">Placa <h11>*</h11></label>
-            <div class="col-md-2">
-              <input id="placa" name="placa" placeholder="letra e numeros" class="form-control input-md" maxlength="7">
-            </div>
+          <label class="col-md-2 control-label" for="tipo_morador">Tipo de Morador<h11>*</h11></label>
+          <div class="col-md-2">
+            <select required id="tipo_morador" name="tipo_morador" class="form-control">
+            <option value=""></option>
+              <option value="Propietario">Propietario</option>
+              <option value="Locatario">Locatario</option>
+            </select>
+          </div>
 
             <label class="col-md-2 control-label" for="prependedtext">Apartamento</label>
             <div class="col-md-2">
               <div class="input-group">
                 <span class="input-group-addon">Bloco <h11>*</h11></span>
-                <select required id="bloco" name="bloco" class="form-control">
+                <select required id="id_bloco" name="id_bloco" class="form-control">
                 <option value=""></option>   
-              <option value="1">Bloco-1</option>
-              <option value="2">Bloco-2</option>
-              <option value="3">Bloco-3</option>
-              <option value="4">Bloco-4</option>
+              <option value="1">Bloco-A</option>
+              <option value="2">Bloco-B</option>
+              <option value="3">Bloco-C</option>
+              <option value="4">Bloco-D</option>
+              <option value="5">Bloco-E</option>
+              <option value="6">Bloco-F</option>
             </select>
               </div>
             </div>
@@ -123,14 +129,16 @@
 
         <!-- Select Basic -->
         <div class="form-group">
-          <label class="col-md-2 control-label" for="tipo_morador">Tipo de Morador<h11>*</h11></label>
-          <div class="col-md-2">
-            <select required id="tipo_morador" name="tipo_morador" class="form-control">
-            <option value=""></option>
-              <option value="Propietario">Propietario</option>
-              <option value="Locatario">Locatario</option>
-            </select>
-          </div>
+        <label class="col-md-2 control-label" for="placa">Veiculo<h11>*</h11></label>
+            <div class="col-md-2">
+              <input id="descricao_veiculo" name="descricao_veiculo" class="form-control input-md">
+            </div>
+  
+            <label class="col-md-2 control-label" for="placa">Placa <h11>*</h11></label>
+            <div class="col-md-2">
+              <input id="placa" name="placa" placeholder="letra e numeros" class="form-control input-md" maxlength="7">
+              </div>
+
         </div>
 
         <br>
