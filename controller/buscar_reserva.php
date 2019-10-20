@@ -10,8 +10,9 @@ $reserva = new Reserva();
 $reserva->setTorre($torre = $_POST['torre']);
 $reserva->setEspacos($espacos = $_POST['espacos']);
 $reserva->setData_reserva($data_reserva = $_POST['dtEvento']);
+$reserva->setStatus_reserva($status_reserva = $_POST['status']);
 
-header("Location: /Controle-de-acesso/view/reservas_view.php?torre=$torre&espacos=$espacos&dtEvento=$data_reserva");
+header("Location: /Controle-de-acesso/view/reservas_view.php?torre=$torre&espacos=$espacos&dtEvento=$data_reserva&status=$status_reserva");
 
 
 echo($torre) . "</br>";

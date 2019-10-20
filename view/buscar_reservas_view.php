@@ -62,9 +62,14 @@ require_once('../controller/conexao_banco.php');?>
         <div class="col-md-3">
              <div class="input-group">
               <span class="input-group-addon">Status<h11>*</h11></span>
-              <select required id="id_status_reserva" name="id_status_reserva" class="form-control">
-              <option value="1">ATIVA</option>
-              <option value="2">CANCELADA</option>
+              <select required id="status" name="status" class="form-control">
+              <?php 
+                $buscaStatus  = mysqli_query($link, "SELECT Status_reserva, id_status_reserva FROM tb_status_reserva "); 
+                $arrayStatus = $buscaStatus->fetch_all();
+                foreach($arrayStatus as $key => $value):
+                  echo '<option value="'.$value[1].'">'.$value[0].'</option>'; 
+                endforeach;
+                ?>
             </select>
             </div>
           </div>     

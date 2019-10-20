@@ -54,7 +54,9 @@ require_once('../controller/conexao_banco.php');
 
 
           <div class="form-group">
-    
+        
+              <div class="col-md-11 control-label">
+
                 <label class="col-md-2 control-label" for="id_morador">Código Morador<h11></h11></label>  
                 <div class="col-md-2">
                   <input id="id_morador" name="id_morador" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
@@ -73,7 +75,7 @@ require_once('../controller/conexao_banco.php');
                 </div>
 
               </div>
-    
+            </div>
             <div class="form-group">
 
             </div>
