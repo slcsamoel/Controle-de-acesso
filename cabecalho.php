@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION["usuario"])) header("Location: index.php?erro=1");
+if (!isset($_SESSION['usuario'])) header("Location: index.php?erro=1");
 $usuario = $_SESSION['usuario'];
 $id_nivel_acesso = $_SESSION['id_nivel_acesso'];
 

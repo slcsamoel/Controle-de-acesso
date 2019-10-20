@@ -1,15 +1,28 @@
 <?php
-include_once('Pessoa.php');
-
+require_once('Pessoa.php');
 class Morador extends Pessoa
 {
-
-
+    //private $id_morador;
     private $nome_mae;
     private $nome_pai;
     private $telefone;
     private $placa;
     private $tipo_morador;
+
+   /*     
+    public function getId_morador()
+    {
+        return $this->id_morador;
+    }
+    
+    public function setId_morador($id_morador)
+    {
+        $this->id_morador = $id_morador;
+
+        return $this;
+    }
+    */
+
 
     public function getTipo_morador()
     {
@@ -122,17 +135,37 @@ class Morador extends Pessoa
         }
         return $cadastrado;
     }
-    function buscar_morador($link, $id_morador ,$nome)
-    {
-        $sql = "SELECT * fROM tb_morador  WHERE id_morador ='$id_morador' OR nome LIKE '%$nome%'";
+    function buscar_morador($link, $id_morador,$cpf,$nome)
+    {   
+        $cadastro = "";
+        if(isset($id_morador) && $id_morador!=''){
+        $sql = "SELECT * fROM tb_morador  WHERE id_morador = '$id_morador'";
         $result_select = mysqli_query($link, $sql);
-        if ($result_select) {
-            $cadastro = mysqli_fetch_array($result_select);
-        } else {
+        $cadastro = mysqli_fetch_array($result_select);
+        } 
+        elseif(isset($cpf) && $cpf !=''){          
+        $sql = "SELECT * fROM tb_morador  WHERE cpf = '$cpf'";
+        $result_select = mysqli_query($link, $sql);
+        $cadastro = mysqli_fetch_array($result_select);              
+        }
+        elseif(isset($nome) && $nome !=''){          
+            $sql = "SELECT * fROM tb_morador  WHERE nome  LIKE '%$nome%'";
+            $result_select = mysqli_query($link, $sql);
+            $cadastro = mysqli_fetch_array($result_select);            
+        }else{
             echo  "<script>alert('Erro na Consulta');</script>";
         }
-        return $cadastro; 
+         
+        if(isset ($cadastro['nome'])){
+            return $cadastro;
+        }else{
+        
+            echo "<script>alert('Cadastro não existe');</script>";
+            echo "<script language='javascript'>history.back()</script>";
+        } 
     }
+
+
 
 
 }

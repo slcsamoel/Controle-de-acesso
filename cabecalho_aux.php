@@ -62,7 +62,7 @@ $id_nivel_acesso = $_SESSION["id_nivel_acesso"];
                     </li>
                     <li><a href="../principal.php">Menu Principal</a></li>
                     <li>
-                      <a href="../controller/sair.php" class="dropdown-toggle" data-toggle="dropdown">
+                      <a href="../controller/sair.php " class="dropdown-toggle" data-toggle="dropdown">
                         Sair</a>
                     </li>
                   </ul>
