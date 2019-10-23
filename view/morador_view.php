@@ -28,14 +28,14 @@ $morador = mysqli_fetch_array($resultado_morador);
 //buscando o apartamento
 $resultado_apart= "SELECT * FROM tb_morador as mor 
 LEFT JOIN tb_apartamento as apart ON (mor.id_apartamento = apart.id_apartamento) INNER JOIN tb_bloco as bloc ON (apart.id_bloco = bloc.id_bloco) 
-WHERE mor.id_morador = '$id_morador'  ";
+WHERE mor.id_morador = '$id_morador'";
 $resultado_apartamento = mysqli_query($link, $resultado_apart);
 $apartamento = mysqli_fetch_array($resultado_apartamento);
 
 //buscando as movimentações
 $btn_entrada = "";
 $btn_saida = "";
-$resultado_movi = "SELECT * FROM tb_mov_morador WHERE id_morador = '$id_morador'";
+$resultado_movi = "SELECT * FROM tb_mov_morador WHERE id_morador = '$id_morador' ORDER BY id_movimentacao DESC LIMIT 1";
 $resultado_movimentacao = mysqli_query($link, $resultado_movi);
 $movimentacao = mysqli_fetch_array($resultado_movimentacao);
 

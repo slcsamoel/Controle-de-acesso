@@ -71,7 +71,7 @@ require_once('../controller/conexao_banco.php');
 
                 <label class="col-md-2 control-label" for="data_reserva">Data Evento<h11>*</h11></label>  
                 <div class="col-md-2">
-                  <input id="data_reserva" name="data_reserva" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+                  <input id="data_reserva" name="data_reserva"  class="form-control input-md" required="" type="date" maxlength="11" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
                 </div>
 
               </div>

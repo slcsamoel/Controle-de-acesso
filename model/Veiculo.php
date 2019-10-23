@@ -31,7 +31,6 @@ class Veiculo{
         return $this;
     }      
 
-
     public function cadastraveiculo($link,$id_morador,$placa,$descricao_veiculo){
 
         $sql = "INSERT INTO tb_veiculo(id_morador,placa,descricao_veiculo) VALUES ($id_morador,'$placa',
