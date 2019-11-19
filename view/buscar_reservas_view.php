@@ -1,4 +1,5 @@
 <?php require_once "../cabecalho_aux.php";
+require_once('../model/Reserva.php');
 require_once('../controller/conexao_banco.php');?>
 <title>buscar_reserva</title>
 
@@ -12,7 +13,7 @@ require_once('../controller/conexao_banco.php');?>
   <div class="row">
     <div class="col-sm-12">
 
-      <form class="form-horizontal" method="POST" action="../controller/buscar_reserva.php">
+      <form class="form-horizontal" method="POST" action="#">
 
         <div class="panel panel-primary">
 
@@ -20,20 +21,7 @@ require_once('../controller/conexao_banco.php');?>
           <div class="panel-body">
 
 
-           <div class="form-group">
-            <label class="col-md-2 control-label" for="torre">Torre<h11></h11></label>
-            <div class="col-md-2">
-              <select required id="torre" name="torre" class="form-control">
-              <option value=""></option>
-               <?php 
-                $buscaTorre  = mysqli_query($link, "SELECT descricao_bloco, id_bloco FROM tb_bloco "); 
-                $arrayTorres = $buscaTorre->fetch_all();
-                foreach($arrayTorres as $key => $value):
-                  echo '<option value="'.$value[1].'">'.$value[0].'</option>'; 
-                endforeach;
-                ?>
-              </select>
-            </div>
+           
 
             <!-- Prepended checkbox -->
             <label class="col-md-2 control-label" for="espacos">Espaços<h11></h11></label>
@@ -59,22 +47,7 @@ require_once('../controller/conexao_banco.php');?>
         <div class="col-md-2">
         </div>
 
-        <div class="col-md-3">
-             <div class="input-group">
-              <span class="input-group-addon">Status<h11>*</h11></span>
-              <select required id="status" name="status" class="form-control">
-              <?php 
-                $buscaStatus  = mysqli_query($link, "SELECT Status_reserva, id_status_reserva FROM tb_status_reserva "); 
-                $arrayStatus = $buscaStatus->fetch_all();
-                foreach($arrayStatus as $key => $value):
-                  echo '<option value="'.$value[1].'">'.$value[0].'</option>'; 
-                endforeach;
-                ?>
-            </select>
-            </div>
-          </div>     
-          <div class="col-md-5">
-        </div>
+        
 
 
         <div class="col-md-2">
@@ -86,6 +59,18 @@ require_once('../controller/conexao_banco.php');?>
 
 
     </div>
+    <?php
+
+  error_reporting(0);
+  ini_set(“display_errors”, 0 );
+
+  $morador = new Morador();
+  $morador->setNome($nomeMorador = $_POST['nome']);
+  $morador->buscarMorador($link, $nomeMorador);
+  ?>
+
+
+
   </form>
 
 

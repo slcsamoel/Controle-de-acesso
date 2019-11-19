@@ -38,9 +38,9 @@ class Veiculo{
         mysqli_query($link, $sql);
     }
 
-    public function buscarveiculo($link,$id_morador , $placa){
+    public function buscarveiculo($link,$id_morador,$placa){
 
-        $sql = "SELECT * fROM tb_veiculo  WHERE id_morador = $id_morador AND placa = $placa
+        $sql = "SELECT * fROM tb_veiculo  WHERE id_morador = $id_morador AND placa LIKE '%$placa%'
          ";
         $result_select = mysqli_query($link, $sql);
     if($result_select){
@@ -55,7 +55,11 @@ class Veiculo{
 
     }
 
+    public function alterar_veiculo($link,$id_veiculo,$placa,$descricao_veiculo){
+              mysqli_query($link," UPDATE `tb_veiculo` SET `placa` ='$placa',`descriçao_veiculo`='$descricao_veiculo' WHERE `id_veiculo` ='$id_veiculo'");
+                return null;
 
+   }
 
-
-}
+  
+} 

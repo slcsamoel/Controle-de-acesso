@@ -5,17 +5,17 @@ require_once('Pessoa.php');
 class Usuario extends Pessoa {
 
     private $usuario;
-    private $id ; 
+    private $id_funcionario ; 
     private $senha;
     private $nivel_acesso; 
     
-    public function setId($id){
-        $this->id = $id;
+    public function setId_funcionario($id_funcionario){
+        $this->id_funcionario = $id_funcionario;
         return $this;
     }
 
-    public function getId(){
-        return $this->id;
+    public function getId_funcionario(){
+        return $this->id_funcionario;
 
     }
 
@@ -61,16 +61,23 @@ class Usuario extends Pessoa {
     
 function cadastra_usuario($link,$senha, $usuario, $nivel_acesso, $id_funcionario){
     $sql = " INSERT INTO tb_usuario(senha,usuario,id_nivel_acesso,id_funcionario,id_status) VAlUES('$senha','$usuario', $nivel_acesso,$id_funcionario,1)";
-
         $result_isert = mysqli_query($link , $sql);
-
         if($result_isert){
-            echo 'Usuario cadastrado';
-
+            echo  "<script>alert('Usuario cadastrado com sucesso!');</script>"; 
+            echo "<script>window.location='../View/funcionario_view.php?id=".$id_funcionario."'</script>";  
         }else{
-        echo 'Erro ao fazer cadastro ';
-        }
+            echo  "<script>alert('Erro ao cadastrar!');</script>"; 
+            echo "<script>window.location = '../View/funcionario_view.php?id=".$id_funcionario."</script>";     
+        }                 
    }
+
+function alterar_senha($link , $senha , $id_usuario){
+    mysqli_query($link," UPDATE `tb_usuario` SET `senha`='$senha' WHERE id_usuario = '$id_usuario' ");
+    echo  "<script>alert('Senha alterada com sucesso!');</script>"; 
+    echo "<script>window.location = '../principal.php';</script>";  
+}
+
+
 }
 
 ?>

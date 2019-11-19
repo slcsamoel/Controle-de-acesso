@@ -1,6 +1,8 @@
 
 <?php 
-require_once "../cabecalho_aux.php";?>
+require_once "../model/Morador.php";
+require_once "../cabecalho_aux.php";
+require_once('../controller/conexao_banco.php');?>
 <title>buscar_morador</title>
 
 <!-- Bootstrap -->
@@ -15,7 +17,7 @@ require_once "../cabecalho_aux.php";?>
   <div class="row">
     <div class="col-sm-12">
 
-      <form class="form-horizontal" action="../controller/buscar_morador.php" method="post">
+      <form class="form-horizontal" action="#" method="post">
 
         <div class="panel panel-primary">
 
@@ -25,17 +27,17 @@ require_once "../cabecalho_aux.php";?>
 
               <div class="col-md-12 control-label">
 
-                <label class="col-md-2 control-label" for="">Codigo de Acesso<h11></h11></label>  
+                <!---<label class="col-md-2 control-label" for="">Codigo de Acesso<h11></h11></label>  
                 <div class="col-md-1">
                   <input id="id_morador" name="id_morador"  class="form-control input-md" type="text" maxlength="10" pattern="[0-9]+$">
-                </div>
+                </div>-->
 
-                <label class="col-md-2 control-label" for="cpf">CPF <h11>*</h11></label>  
+               <!--- <label class="col-md-2 control-label" for="cpf">CPF <h11>*</h11></label>  
               <div class="col-md-2">
                 <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md"  type="text" maxlength="11" pattern="[0-9]+$">
-              </div>
+              </div>-->
               <label class="col-md-2 control-label" for="nome">Nome<h11>*</h11></label>  
-              <div class="col-md-3">
+              <div class="col-md-6">
                 <input id="nome" name="nome" placeholder="Nome" class="form-control input-md"  type="text">
               </div>
 
@@ -63,6 +65,17 @@ require_once "../cabecalho_aux.php";?>
         </div>
 
       </div>
+
+      <?php
+
+  error_reporting(0);
+  ini_set(“display_errors”, 0 );
+
+  $morador = new Morador();
+  if($_POST['nome']!='' AND $_POST['nome'] != null ){$morador->setNome($nomeMorador = $_POST['nome']); 
+  $morador->buscarMorador($link, $nomeMorador);
+  }
+?>
     </form>
 
     </div>

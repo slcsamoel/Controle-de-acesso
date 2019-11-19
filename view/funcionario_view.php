@@ -12,12 +12,18 @@ INNER JOIN tb_img_funcionario as img ON (func.id_funcionario = img.id_funcionari
 WHERE func.id_funcionario = '$id'  ";
 $resultado_usuario = mysqli_query($link, $resultado);
 $funcionario = mysqli_fetch_assoc($resultado_usuario);
-$_SESSION["id_funcionario"] = $funcionario['id_funcionario'];
-
+$dt_cad = new DateTime($funcionario['dt_cadastro']);
+$dt_cadastro = $dt_cad->format('d-m-Y H:i:s');
 $url_usuario = "cadastra_usuario_view.php?id=$funcionario[id_funcionario]";
 
-if($funcionario['id_funcao']!=1){
-  $display ='none';
+
+$sql_user = "SELECT * FROM tb_usuario WHERE  id_funcionario = '$id'";
+$result_user=mysqli_query($link,$sql_user); 
+$cadastrado = mysqli_num_rows($result_user);
+
+
+if($funcionario['id_funcao']!=1 || $cadastrado > 0){
+  $display ='disabled';
 }else{
   $display ='';
 }
@@ -52,7 +58,7 @@ if($funcionario['id_funcao']!=1){
             <div class="form-group">
               <label class="col-md-2 control-label" for="cpf">CPF <h11>*</h11></label>
               <div class="col-md-2">
-                <input id="cpf" name="cpf" class="form-control input-md" required="" type="text" value="<?php echo $funcionario['cpf']?>" maxlength="11" pattern="[0-9]+$">
+                <input id="cpf" name="cpf" class="form-control input-md" required="" type="text" value="<?php echo $funcionario['cpf']?>" maxlength="11" pattern="[0-9]+$" >
               </div>
 
               <label class="col-md-1 control-label" for="dt_nascimento">Nascimento<h11>*</h11></label>
@@ -91,7 +97,7 @@ if($funcionario['id_funcao']!=1){
           <div class="form-group">
             <label class="col-md-2 control-label" for="dt_cadastro">Data Cadastro<h11></h11></label>
             <div class="col-md-2">
-              <input id="dt_cadastro" name="dt_cadastro"  class="form-control input-md"  type="date-time" value="<?php echo $funcionario['dt_cadastro']?>" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+              <input id="dt_cadastro" name="dt_cadastro"  class="form-control input-md"  type="date-time" value="<?php echo $dt_cadastro?>"  onBlur="showhide()">
             </div>
 
           </div>
@@ -145,28 +151,36 @@ if($funcionario['id_funcao']!=1){
             <div class="col-sm-2">
               <img name=" imagem" src="<?php echo '../fotos_funcionarios/'.$funcionario['imagem']?>" class="img-responsive img-thumbnail">
             </div>
-
           </div> 
           <div class="form-group">
-            <div class="col-md-2">
-                  
+          <div class="col-md-6">   
+          </div>    
+             <label class="col-md-2 control-label">Altera Foto</label>
+             <div class="col-md-3">
+               <input name="imagem_nova" type="file" class=" form-control-file " />
+             </div>
+             </div>
+          <div class="form-group">
+            <div class="col-md-2">     
             </div>
             <div class="col-md-5">
             </div>
           
-            <div class="col-md-2">
-             <a class="btn btn-primary " <?= 'style="display:'.$display.'"'?> href="<?=$url_usuario?>"> 
+            <div class="col-md-1">
+             <a class="btn btn-primary " <?=$display?>  href="<?=$url_usuario?>"> 
               Usuario
             </a> 
             </div>
             <div class="col-md-1">
-            <a type="button" class="btn btn-primary " href="../principal.php"> 
+            <a type="button" class="btn btn-primary " href="../view/buscar_funcionario_view.php"> 
               Voltar
             </a>
             </div>
-
+            <div class="col-md-1">     
+            </div>
+     
             <div class="col-md-1">
-              <button id="btn_salvar" type="submit" class="btn btn-primary" value="salvar" >Salvar</button>
+              <button id="btn_salvar" type="submit" class="btn btn-primary" value="salvar" >Salvar e Sair</button>
             </div>
             
           </div>

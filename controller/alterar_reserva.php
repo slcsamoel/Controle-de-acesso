@@ -18,14 +18,14 @@ $reserva->setEvento($evento = $_POST['evento']);
 $reserva->setData_reserva($data_reserva = $_POST['data_reserva']);
 $reserva->setStatus_reserva($status_reserva = $_POST['status']);
 
-echo($torre) . "</br>";
-echo($espacos) . "</br>";
-echo($evento) . "</br>";
-echo($id_morador) . "</br>";
-echo($data_reserva) . "</br>";
-echo($id_usuario) . "</br>";
-echo($status_reserva) . "</br>";
-echo($id_reserva) . "</br>";
+/*echo($torre)  . " Tore" . "</br>";
+echo($espacos)  . " Espaço" . "</br>";
+echo($evento)  . " evento" . "</br>";
+echo($id_morador)  . " morador" . "</br>";
+echo($data_reserva)  . " data " . "</br>";
+echo($id_usuario)  . " usuario" . "</br>";
+echo($status_reserva)  . " status" . "</br>";
+echo($id_reserva) . " reserva" . "</br>" ;*/
 
 
 

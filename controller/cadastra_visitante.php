@@ -19,10 +19,11 @@ $id_usuario = $_SESSION['id_usuario'];
 $sql = "SELECT * fROM tb_visitante  WHERE cpf ='$cpf' AND id_status= 1 ";
 $result_select = mysqli_query($link, $sql);
 $verificaCpf    = mysqli_num_rows($result_select);
+$row_busca = mysqli_fetch_assoc($result_select);
 
 if ($verificaCpf > 0) {
     echo  "<script>alert('Já possui um visitante com esse CPF cadastrado!');</script>";
-    echo "<script>window.location = '../view/cadastra_visitante_view.php';</script>";
+    echo "<script>window.location = '../view/visitante_view.php?id=" . $row_busca[id_visitante] . "';</script>";
 } else {
     
     $cadastra = $class_visitante->cadastra_visitante($link, $nome, $cpf, $dt_nascimento, $sexo, $rg, $telefone, $observacao, $id_usuario, $id_tipo_visita);

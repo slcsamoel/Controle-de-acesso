@@ -69,24 +69,38 @@ class Funcionario extends Pessoa{
           }
 
 
-          function alterar_funcionario($link,$id_funcionario, $nome, $cpf, $dt_nascimento, $sexo, $rg, $telefone, $turno, $id_funcao){
-            $sql =" UPDATE `tb_funcionario` SET `cpf` ='$cpf',`nome`='$nome',`rg`= '$rg',`turno`='$turno',`sexo` ='$sexo',`telefone`='$telefone', `dt_nascimento` ='$dt_nascimento', `id_funcao`='$id_funcao' WHERE `id_funcionario` ='$id_funcionario'";
-            $result_update = mysqli_query($link,$sql);
-            $alterado = false;
+          function alterar_funcionario($link , $id_funcionario, $nome, $cpf, $dt_nascimento, $sexo, $rg, $telefone, $turno, $id_funcao){
+            mysqli_query($link," UPDATE `tb_funcionario` SET `cpf` ='$cpf',`nome`='$nome',`rg`= '$rg',`turno`='$turno',`sexo` ='$sexo',
+            `telefone`='$telefone', `dt_nascimento` ='$dt_nascimento', `id_funcao`='$id_funcao' WHERE `id_funcionario` ='$id_funcionario'");    
 
-            if($result_update){
+             echo  "<script>alert('Cadastro alterado com sucesso!');</script>"; 
+               echo "<script>window.location = '../View/buscar_Funcionario_view.php';</script>";  
 
-                $alterado = true;
-              }else{
-                echo  "<script>alert('Erro na execução da query');</script>"; 
-                echo "<script>window.location = '../view/buscar_Funcionario_view.php';</script>";
-              }
-             
-             return  $alterado;
-            }
+            }   
             
-                
-
-
+            public function altera_imagem($link , $imagem_nova , $id_funcionario){
+                // excluindo a imagem antiga da pasta 
+                $sql =mysqli_query($link, " SELECT imagem FROM tb_img_funcionario WHERE id_funcionario = '$id_funcionario'");
+                $verificar = mysqli_num_rows($sql);
+                if($verificar > 0){
+                $foto_antiga = mysqli_fetch_array($sql);
+                $url_antiga = '../fotos_funcionarios/'.$foto_antiga['imagem'];
+                unlink($url_antiga);
+                $diretorio = '../fotos_funcionarios/';
+  
+              move_uploaded_file($_FILES['imagem_nova']['tmp_name'], $diretorio.$imagem_nova);
+  
+              $sql_foto = "UPDATE `tb_img_funcionario` SET `imagem`='$imagem_nova' WHERE id_funcionario = '$id_funcionario'";
+              mysqli_query($link, $sql_foto);
+              }else{
+              
+                $diretorio = '../fotos_funcionarios/';
+  
+              move_uploaded_file($_FILES['imagem_nova']['tmp_name'], $diretorio.$imagem_nova);
+  
+              $sql_foto = "INSERT INTO tb_img_funcionario(imagem , id_funcionario)VALUES('$imagem_nova',$id_funcionario)";
+              mysqli_query($link, $sql_foto);
+          }
+  }
 
 }

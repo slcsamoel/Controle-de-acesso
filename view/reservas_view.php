@@ -3,20 +3,14 @@
  require_once('../model/Reserva.php');
 
 $reserva = new Reserva();
-$torre = $_GET['torre'];
-$espacos = $_GET['espacos'];
-$data_reserva = $_GET['dtEvento'];
-$status_reserva = $_GET['status'];
+$idReserva = $_GET['id'];
  
- $busca  = "SELECT id_reserva, descricao_bloco, descricao_espaco, res.id_morador, nome, evento, dt_reserva, Status_reserva FROM tb_reserva AS res
+ $busca  = "SELECT id_reserva, descricao_bloco, descricao_espaco, res.id_morador, nome, evento, dt_reserva, status_reserva, res.id_bloco, res.id_status_reserva,  res.id_espaco FROM tb_reserva AS res
                                 INNER JOIN tb_espacos ON (res.id_espaco = id_espacos) 
                                 INNER JOIN tb_morador AS tbMorador  ON (res.id_morador = tbMorador.id_morador)
                                 INNER JOIN tb_bloco AS tbBloco ON (res.id_bloco = tbBloco.id_bloco) 
                                 INNER JOIN tb_status_reserva AS tbStatus ON (res.id_status_reserva = tbStatus.id_status_reserva) 
-                                WHERE res.id_bloco = '$torre' 
-                                AND   id_espaco = '$espacos'
-                                AND   dt_reserva = '$data_reserva'
-                                AND   tbStatus.id_status_reserva = '$status_reserva' ";
+                                WHERE id_reserva = '$idReserva' ";
                 $resultado_busca = mysqli_query($link, $busca);
                 $row_usuario = mysqli_fetch_assoc($resultado_busca);
                 ?>
@@ -44,7 +38,7 @@ $status_reserva = $_GET['status'];
               <div class="input-group">
                 <span class="input-group-addon">Bloco<h11>*</h11></span>
                 <select  id="torre" name="torre" class="form-control">
-                <option value="<?php echo($torre)?>" ><?php echo($row_usuario['descricao_bloco'])?></option>   
+                <option value="<?php echo($row_usuario['id_bloco'])?>" ><?php echo($row_usuario['descricao_bloco'])?></option>   
                 <?php 
                 $buscaTorre  = mysqli_query($link, "SELECT descricao_bloco, id_bloco FROM tb_bloco "); 
                 $arrayTorres = $buscaTorre->fetch_all();
@@ -60,7 +54,7 @@ $status_reserva = $_GET['status'];
              <div class="input-group">
               <span class="input-group-addon">Espaço<h11>*</h11></span>
               <select  id="espacos" name="espacos" class="form-control">
-                <option value="<?php echo($espacos)?>"><?php echo($row_usuario['descricao_espaco'])?></option>   
+                <option value="<?php echo($row_usuario['id_espaco'])?>"><?php echo($row_usuario['descricao_espaco'])?></option>   
                 <?php 
                 $buscaEspacos  = mysqli_query($link, "SELECT descricao_espaco, id_espacos FROM tb_espacos "); 
                 $arrayEspacos = $buscaEspacos->fetch_all();
@@ -77,7 +71,7 @@ $status_reserva = $_GET['status'];
              <div class="input-group">
               <span class="input-group-addon">Status<h11>*</h11></span>
               <select  id="status" name="status" class="form-control">
-                <option value="<?php echo($status_reserva)?>"><?php echo($row_usuario['Status_reserva'])?></option>   
+                <option value="<?php echo($row_usuario['id_status_reserva'])?>"><?php echo($row_usuario['status_reserva'])?></option>   
                 <?php 
                 $buscaStatus  = mysqli_query($link, "SELECT Status_reserva, id_status_reserva FROM tb_status_reserva "); 
                 $arrayStatus = $buscaStatus->fetch_all();

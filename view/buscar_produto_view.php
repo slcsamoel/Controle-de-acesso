@@ -1,5 +1,7 @@
 <?php
-require_once "../cabecalho_aux.php";?>
+require_once "../cabecalho_aux.php";
+require_once('../controller/conexao_banco.php');
+require_once('../model/Produto.php');?>
 <title>buscar_produto</title>
 
 <!-- Bootstrap -->
@@ -14,7 +16,7 @@ require_once "../cabecalho_aux.php";?>
   <div class="row">
     <div class="col-sm-12">
 
-      <form class="form-horizontal">
+      <form class="form-horizontal" action="#" method="POST">
 
         <div class="panel panel-primary">
 
@@ -22,20 +24,20 @@ require_once "../cabecalho_aux.php";?>
           <div class="panel-body">
             <div class="form-group">
 
-              <div class="form-group">
-                <label class="col-md-2 control-label" for="torre">Código<h11></h11></label>
+              <!--<div class="form-group">
+                <label class="col-md-2 control-label" for="id_produto">Código do produto<h11></h11></label>
                 <div class="col-md-2">
-                  <input id="numero" name="numero" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
-                </div>
+                  <input id="id_produto" name="id_produto" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
+                </div>-->
 
                 <!-- Prepended checkbox -->
                 <label class="col-md-2 control-label" for="descricao">Descrição<h11></h11></label>  
-                <div class="col-md-3">
-                  <input id="descricao" name="descricao"  class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
+                <div class="col-md-6">
+                  <input id="descricao" name="descricao"  class="form-control input-md" required="" type="text" maxlength="11" >
                 </div>
 
              <div class="col-md-2">
-            <button type="button" class="btn btn-primary">Buscar
+            <button type="sumit" class="btn btn-primary">Buscar
             </button>
             </div>
             </div>
@@ -46,8 +48,16 @@ require_once "../cabecalho_aux.php";?>
 
             </div>
           </div>
+          <?php
+          error_reporting(0);
+          ini_set(“display_errors”, 0 );
 
+          $produto = new Produto();
+          $produto->setDescricao($descricao = $_POST['descricao']);
+          $produto->buscaProduto($link, $descricao);
+        ?>
         </div>
+        
 
       </form>
     </div>

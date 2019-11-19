@@ -1,17 +1,14 @@
-<?php require_once "../cabecalho_aux.php";
+<?php
+require_once "../cabecalho_aux.php";
 require_once('../controller/conexao_banco.php');
 
-$id = $_GET['id'];
+$id_funcionario= $_GET['id'];
+$_SESSION['id_funcionario'] = $id_funcionario;  
 
-$sql_user = "SELECT * FROM tb_usuario WHERE  id_funcionario = '$id' ";
+
+$sql_user = "SELECT * FROM tb_usuario WHERE  id_funcionario = '$id_funcionario'";
 $result_user=mysqli_query($link,$sql_user); 
 $cadastrado = mysqli_num_rows($result_user);
-
-
-  if ($cadastrado>0){ 
-  echo"<script>alert('Usuario já cadastrado');</script>"; 
-  header("Location: funcionario_view.php?id=$id");
-  }
 
 ?>
 <title>Cadastra_usuario</title>
@@ -45,6 +42,10 @@ $cadastrado = mysqli_num_rows($result_user);
                 <option value="2"><h3>2-Sindico</h3></option>
               </select>
             </div>
+            <div class="col-md-1">
+                  <input id="id_funcionario" name="id_funcionario"  class="form-control input-md"  type="text" value="<?php echo $id_funcionario?>" maxlength="9" readonly >
+                </div>
+
           </div>
 
 
@@ -60,7 +61,7 @@ $cadastrado = mysqli_num_rows($result_user);
 
                 <label class="col-md-2 control-label" for="senha">Senha<h11></h11></label>  
                 <div class="col-md-2">
-                  <input id="senha" name="senha" placeholder="*********" class="form-control input-md" required="" type="passwords">
+                  <input id="senha" name="senha" placeholder="*********" class="form-control input-md" required="" type="password">
                 </div>
                
               </div>
@@ -78,6 +79,7 @@ $cadastrado = mysqli_num_rows($result_user);
             <div class="col-md-2">
               <button type="submit" class="btn btn-primary" value="Voltar" onClick="JavaScript: window.history.back();">Voltar
               </button>
+               </div> 
 
             <div class="col-md-2">
               <button type="submit" class="btn btn-primary" value="Cadastrar">Cadastrar

@@ -1,4 +1,7 @@
-<?php require_once "../cabecalho_aux.php"; ?>
+<?php
+require_once "../cabecalho_aux.php";
+require_once "../model/Visitante.php";
+require_once('../controller/conexao_banco.php'); ?>
 <title>Movimentação de Morador</title>
 
 <!-- Bootstrap -->
@@ -11,7 +14,7 @@
     <div class="row">
         <div class="col-sm-12">
 
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="#" method="post">
 
                 <div class="panel panel-primary">
 
@@ -20,15 +23,9 @@
 
                             <div class="col-md-11 control-label">
 
-                                <label class="col-md-2 control-label" for="id">ID<h11></h11></label>
-                                <div class="col-md-1">
-                                    <input id="cpf" name="id" placeholder="id" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
-                                </div>
-
-
-                                <label class="col-md-2 control-label" for="cpf">CPF<h11></h11></label>
-                                <div class="col-md-4">
-                                    <input id="id" name="cpf" placeholder="Digite o CPF" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
+                                <label class="col-md-2 control-label" for="cpf">CPF <h11>*</h11></label>
+                                <div class="col-md-2">
+                                    <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
                                 </div>
 
                             </div>
@@ -37,11 +34,11 @@
 
                                 <label class="col-md-2 control-label" for="dt_inicio">Data Inicio<h11>*</h11></label>
                                 <div class="col-md-2">
-                                    <input id="dtnasc" name="dt_inicio" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+                                    <input id="dt_inicio" name="dt_inicio" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" onBlur="showhide()">
                                 </div>
                                 <label class="col-md-2 control-label" for="dt_final">Data Final<h11>*</h11></label>
                                 <div class="col-md-2">
-                                    <input id="dtnasc" name="dt_final" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+                                    <input id="dt_final" name="dt_final" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" onBlur="showhide()">
                                 </div>
 
                             </div>
@@ -53,15 +50,30 @@
                             <div class="col-md-6">
                             </div>
                         </div>
-
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-primary">Gerar Relatorio
+                            <a type="button" class="btn btn-primary " href="../principal.php">
+                                Voltar
+                            </a>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary">Gerar Relatorio
                             </button>
                         </div>
 
+                        <?php
+
+                        error_reporting(0);
+                        ini_set(“display_errors”, 0);
+
+                        $visitante = new Visitante();
+                        if ($_POST['cpf'] != '' || $_POST['cpf'] != null) {
+                            $cpf = $_POST['cpf'];
+                            $dt_inicial = $_POST['dt_inicial'];
+                            $dt_final = $_POST['dt_final'];
+                            $visitante->relatorio_entrada($link, $cpf, $dt_inicial, $dt_final);
+                        }
+                        ?>
                     </div>
-
-
                 </div>
 
             </form>

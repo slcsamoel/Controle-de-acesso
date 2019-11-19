@@ -39,7 +39,7 @@ if ($verificaCpf > 0) {
         $imagem = md5(time()) . $extensao;
         $diretorio = '../fotos_funcionarios/';
 
-        move_uploaded_file($_FILES['imagem']['tmp_name'], $diretorio . $imagem);
+        move_uploaded_file($_FILES['imagem']['tmp_name'], $diretorio.$imagem);
 
         $sql_foto = "INSERT INTO tb_img_funcionario(imagem ,id_funcionario)VALUES('$imagem',$id_funcionario)";
         $result_foto = mysqli_query($link, $sql_foto);

@@ -1,6 +1,5 @@
 <?php
 include "cabecalho.php";
-require_once('model/Morador.php');
 require_once('controller/conexao_banco.php');
 
 ?>
@@ -42,13 +41,13 @@ if (isset($_GET['id_morador'])) {
 <!--Barra navegaçaõ -->
 <form class="form-horizontal" action="controller/principal_movimentacao.php" method="post">
 
+<div class="col-sm-12">
+  <div class="panel panel-primary">
+   <div class="panel-body">
 
-  <div id="img_fundo_nav" class="page-header col-md-4">
-    <h1>
-      <img src="imagens/logo.jpeg" class="ca" opacity:0.3;>
-    </h1>
-  </div>
   <div class="form-group">
+  <div class="col-md-2">
+        </div>
     <label class="col-md-2 control-label" for="id_morador">Codigo de Acesso:<h11>*</h11></label>
     <div class="col-md-1">
       <input name="id_morador" class="form-control input-md" type="text" pattern="[0-9]+$">
@@ -57,35 +56,35 @@ if (isset($_GET['id_morador'])) {
     <div class="col-md-2">
       <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md"  type="text" maxlength="11" pattern="[0-9]+$">
     </div>
-    <div class="col-sm-1">
+    <div class="col-md-1">
       <button type="submit" class="btn btn-primary">Buscar</button>
     </div>
+    </div> 
 
-
-    <div class="col-md-6 control-label">
-      <div class="col-sm-8">
+    <div class="form-group">
+    <div class="col-md-3 border-0">
+    <img src="imagens/logo.jpeg" class="img-responsive  border-0 ">
       </div>
-      <div class="col-sm-4">
+      <div class="col-md-7">
+      </div>
+      <div class="col-md-2">
         <img src="<?php echo $imagem; ?>" class="img-responsive img-thumbnail" name="imagem">
       </div>
-
-      <div class="col-md-12 control-label">
-        <div class="col-sm-8">
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
           <a href="controller/entrada_morador.php?id_morador=<?php echo $id_morador ?>" class="btn btn-primary"  name="btn_entrada" <?= $btn_entrada ?>>Entrada</a>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-1">
           <a href="controller/saida_morador.php?id_morador=<?php echo $id_morador ?>" class="btn btn-primary"  name="btn_saida" <?= $btn_saida ?>>Saida</a>
         </div>
-</form>
-</div>
-</div>
-</div>
+        </div>
+        </div>
+   </div>
+</div>     
 
-</div>
-
-</div>
 
 <?php include "rodape.php"; ?>

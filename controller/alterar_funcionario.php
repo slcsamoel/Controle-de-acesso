@@ -15,62 +15,40 @@ $class_funcionario->setId_status($id_status = $_POST['id_status']);
 $class_funcionario->setId_funcao($id_funcao = $_POST['id_funcao']);
 
 
-            //
+//var_dump($class_funcionario);
 
-         $funcionario = $class_funcionario->buscar_funcionario($link, $cpf);
-            $id_funcionario =  $funcionario['id_funcionario'];
-                    // verifica si houve alteração de status caso sim o funcionario e desativado 
-    if($id_status >1){
-
-            // executando query para desativação na tb_funcionario 
-            $sql = "UPDATE tb_funcionario SET id_status = '$id_status' WHERE id_funcionario = '$id_funcionario' ";  
-            $result_desativar = mysqli_query($link ,$sql);
-                // caso a desativação seja feita desativa também na tb usuario 
-            if($result_desativar){
-                    $sql_user = "UPDATE tb_usuario SET id_status = '$id_status' WHERE id_funcionario = '$id_funcionario' ";  
-                    $result_desativar_user = mysqli_query($link ,$sql);
-                        if($result_desativar_user){    
-                                // desativando e redirecionando para a tela de consulta de funcionario. 
-                            echo  "<script>alert('O funcionario Foi desativado!');</script>";
-                            echo "<script>window.location = '../view/buscar_Funcionario_view.php';</script>";
-                        }else{
-                        echo  "<script>alert('Erro ao tenta desativar o usuario');</script>";        
-                         echo "<script>window.location = '../view/buscar_Funcionario_view.php';</script>";
-                        }    
-
-            }else{
-             echo  "<script>alert('Erro ao tenta desativar o funcionario');</script>";
+$funcionario = $class_funcionario->buscar_funcionario($link, $cpf);
+$id_funcionario =  $funcionario['id_funcionario'];
+// verifica si houve alteração de status caso sim o funcionario e desativado 
+if ($id_status > 1) {
+    // executando query para desativação na tb_funcionario 
+    $sql = "UPDATE tb_funcionario SET id_status = '$id_status' WHERE id_funcionario = '$id_funcionario' ";
+    $result_desativar = mysqli_query($link, $sql);
+    // caso a desativação seja feita desativa também na tb usuario 
+    if ($result_desativar) {
+        $sql_user = "UPDATE tb_usuario SET id_status = '$id_status' WHERE id_funcionario = '$id_funcionario' ";
+        $result_desativar_user = mysqli_query($link, $sql);
+        if ($result_desativar_user) {
+            // desativando e redirecionando para a tela de consulta de funcionario. 
+            echo  "<script>alert('O funcionario Foi desativado!');</script>";
             echo "<script>window.location = '../view/buscar_Funcionario_view.php';</script>";
-            }
-                    
-        }else{
-
-        
-            $altera = $class_funcionario ->alterar_funcionario($link,$id_funcionario, $nome, $cpf, $dt_nascimento, $sexo, $rg, $telefone, $turno, $id_funcao);
-            if($altera){
-
-                echo  "<script>alert('Cadastro alterado com sucesso ');</script>";
-                echo "<script>window.location = '../view/buscar_Funcionario_view.php';</script>";
-            }else{
-                echo  "<script>alert('Erro ao Altera Cadastro');</script>";
-                echo "<script>window.location = '../view/buscar_Funcionario_view.php';</script>";
-
-            }
-    
+        } else {
+            echo  "<script>alert('Erro ao tenta desativar o usuario');</script>";
+            echo "<script>window.location = '../view/buscar_Funcionario_view.php';</script>";
+        }
+    } else {
+        echo  "<script>alert('Erro ao tenta desativar o funcionario');</script>";
+        echo "<script>window.location = '../view/buscar_Funcionario_view.php';</script>";
     }
-
-    
-      
-           
-    
-    
-    
-    
-       
+}       
+if(isset($_FILES['imagem_nova']['name']) && !empty($_FILES['imagem_nova']['name'])){
+    $extensao = explode('.', $_FILES['imagem_nova']['name']);
+    $extensao = strtolower(end($extensao));
+    $imagem_nova = md5(time()) . $extensao;
+      $altera_img = $class_funcionario->altera_imagem($link , $imagem_nova , $id_funcionario);
+    } 
 
 
 
-        
-
-    
+    $altera = $class_funcionario->alterar_funcionario($link, $id_funcionario, $nome, $cpf, $dt_nascimento, $sexo, $rg, $telefone, $turno, $id_funcao);
 

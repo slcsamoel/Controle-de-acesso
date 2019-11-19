@@ -19,7 +19,7 @@ $class_morador->setRg($rg = $_POST['rg']);
 $class_morador->setTelefone($telefone = $_POST['telefone']);
 $class_morador->setNome_mae($nome_mae = $_POST['nome_mae']);
 $class_morador->setNome_pai($nome_pai = $_POST['nome_pai']);
-$class_morador->setTipo_morador($tipo_morador = $_POST['tipo_morador']);
+$class_morador->setId_tipo_morador($id_tipo_morador = $_POST['id_tipo_morador']);
 $class_apartamento->setId_bloco($id_bloco = $_POST['id_bloco']);
 $class_apartamento->setNr_apartamento($nr_apartamento = $_POST['nr_apartamento']);
 $class_veiculo->setPlaca($placa=$_POST['placa']);
@@ -34,14 +34,14 @@ $id_apartamento = $apartamento['id_apartamento'];
 $sql = "SELECT * fROM tb_morador  WHERE cpf ='$cpf' AND id_status= 1 ";
 $result_select = mysqli_query($link, $sql);
 
-$verificaCpf   = mysqli_num_rows($result_select);
+$verificaCpf= mysqli_num_rows($result_select);
 // verificando caso seja maior que zero significar que o cpf inserido já existe na base de dados  
 if ($verificaCpf > 0) {
     echo  "<script>alert('Já possui uma Morador com esse CPF cadastrado!');</script>";
     echo "<script>window.location = '../view/cadastra_morador_view.php';</script>";
 } else {
 
-    $cadastrado = $class_morador->cadastra_morador($link, $nome, $cpf, $dt_nascimento, $sexo, $rg, $telefone, $nome_mae, $nome_pai, $tipo_morador, $id_usuario, $id_apartamento);
+    $cadastrado = $class_morador->cadastra_morador($link, $nome, $cpf, $dt_nascimento, $sexo, $rg, $telefone, $nome_mae, $nome_pai, $id_tipo_morador, $id_usuario, $id_apartamento);
 
         //si morador foi cadastrado ira inseri a imagem nos scripts abaixo 
     if ($cadastrado) {
@@ -69,7 +69,7 @@ if ($verificaCpf > 0) {
 
             if ($result_foto) {
                 echo  "<script>alert('Cadastro Efetuado com sucesso');</script>";
-                header("Location: /Controle-de-acesso/view/morador_view.php?id=$id_morador");
+                header("Location: /Controle-de-acesso/view/morador_view.php?id_morador=$id_morador");
             } else {
 
                 echo  "<script>alert('Erro ao efetuar cadastro');</script>";

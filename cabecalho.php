@@ -71,8 +71,7 @@ if($id_nivel_acesso < 2){
                     <li class="dropdown" ><a href="" class="dropdown-toggle" data-toggle="dropdown">Relatorios<span class="caret"></span> </a>
                         <ul id="lt_morador" class="dropdown-menu">
                         <li><a href="view/relatorio_morador_view.php"  >Relatorios movimentação de moradores</a></li>   
-                        <li><a href="view/relatorio_visitante_view.php">Relatorios movimentação de visitantes</a></li>
-                        <li><a href="view/relatorio_morador_view.php"  >Relatorios Produtos baixados</a></li> 
+                        <li><a href="view/relatorio_visitante_view.php">Relatorios movimentação de visitantes</a></li> 
                       </ul>
                     </li>
 
@@ -84,7 +83,10 @@ if($id_nivel_acesso < 2){
                       <ul class="dropdown-menu">
                         <li><a href="view/buscar_produto_view.php">Consultar</a></li>   
                         <li><a href="view/cadastra_produto_view.php">Cadastrar</a></li>
-                      <li><a href="view/consultar_baixar_view.php">Consultar baixar</a></li>   
+                        <li><a href="view/cadastra_entrada_view.php">Entrada Produto</a></li> 
+                        <li><a href="view/selecionar_funcionario_baixa_view.php">Baixar Produto</a></li> 
+                        <li><a href="view/consultar_entrada_view.php">Consultar Entrada</a></li>  
+                      <li><a href="view/consultar_baixa_view.php">Consultar Baixar</a></li>   
                       </ul>
                     </li>
                     <li class="dropdown" >
@@ -92,7 +94,7 @@ if($id_nivel_acesso < 2){
                       Minha Conta  <span class="caret"></span>
                     </a>
                       <ul class="dropdown-menu">
-                        <li><a href="#">Editar</a></li>   
+                        <li><a href="view/alterar_senha_view.php">Muda Senha</a></li>   
                         <li><a href="controller/sair.php">Sair</a></li>
                       </ul>
                     </li>

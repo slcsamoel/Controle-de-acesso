@@ -1,6 +1,9 @@
 <?php
-
-require_once "../cabecalho_aux.php"; ?>
+require_once "../cabecalho_aux.php"; 
+require_once "../model/Visitante.php";
+require_once "../cabecalho_aux.php";
+require_once('../controller/conexao_banco.php');
+?>
 <title>buscar_visitantes</title>
 
 <!-- Bootstrap -->
@@ -13,7 +16,7 @@ require_once "../cabecalho_aux.php"; ?>
   <div class="row">
     <div class="col-sm-12">
 
-      <form class="form-horizontal" action="../controller/buscar_visitante.php" method="post" >
+      <form class="form-horizontal" action="#" method="post">
 
         <div class="panel panel-primary">
 
@@ -21,13 +24,6 @@ require_once "../cabecalho_aux.php"; ?>
             <div class="form-group">
 
               <div class="col-md-11 control-label">
-
-                <label class="col-md-2 control-label" for="cpf">CPF <h11></h11></label>
-                <div class="col-md-2">
-                  <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" type="text" maxlength="11" pattern="[0-9]+$">
-                </div>
-
-
                 <label class="col-md-2 control-label" for="nome">Nome<h11></h11></label>
                 <div class="col-md-4">
                   <input id="nome" name="nome" class="form-control input-md" type="text">
@@ -49,6 +45,17 @@ require_once "../cabecalho_aux.php"; ?>
 
 
         </div>
+        <?php
+
+        error_reporting(0);
+        ini_set(“display_errors”, 0);
+
+        $visitante = new Visitante();
+        if ($_POST['nome'] != '' and $_POST['nome'] != null) {
+          $visitante->setNome($nomeVisitante = $_POST['nome']);
+          $visitante->buscarVisitante($link, $nomeVisitante);
+        }
+        ?>
 
       </form>
     </div>

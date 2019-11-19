@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22-Out-2019 às 04:25
+-- Tempo de geração: 19-Nov-2019 às 21:42
 -- Versão do servidor: 10.4.6-MariaDB
 -- versão do PHP: 7.3.8
 
@@ -529,12 +529,34 @@ INSERT INTO `tb_apartamento` (`id_apartamento`, `nr_apartamento`, `id_bloco`) VA
 CREATE TABLE `tb_baixa_produto` (
   `id_baixa_produto` int(11) NOT NULL,
   `id_funcionario` int(11) DEFAULT NULL,
-  `id_produto` int(11) DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   `motivo` varchar(50) DEFAULT NULL,
-  `dt_baixa` date DEFAULT curdate(),
-  `quantidade_produto` int(11) NOT NULL
+  `dt_baixa` datetime DEFAULT current_timestamp(),
+  `id_status_mov_produto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_baixa_produto`
+--
+
+INSERT INTO `tb_baixa_produto` (`id_baixa_produto`, `id_funcionario`, `id_usuario`, `motivo`, `dt_baixa`, `id_status_mov_produto`) VALUES
+(1, 1, 1, NULL, '2019-11-07 01:58:54', NULL),
+(2, 2, 1, NULL, '2019-11-07 03:24:24', NULL),
+(3, 2, 1, NULL, '2019-11-07 03:24:52', NULL),
+(4, 2, 1, NULL, '2019-11-07 03:30:04', NULL),
+(5, 4, 1, NULL, '2019-11-07 03:33:38', NULL),
+(6, 12, 1, NULL, '2019-11-07 04:44:01', NULL),
+(7, 1, 1, NULL, '2019-11-07 05:17:46', NULL),
+(8, 1, 1, NULL, '2019-11-17 09:52:45', NULL),
+(9, 12, 1, NULL, '2019-11-17 09:54:10', 2),
+(10, 1, 1, NULL, '2019-11-17 09:55:36', 1),
+(11, 1, 1, NULL, '2019-11-19 15:32:42', 1),
+(12, 12, 1, NULL, '2019-11-19 15:35:01', 1),
+(13, 4, 1, NULL, '2019-11-19 15:37:15', 1),
+(14, 12, 1, NULL, '2019-11-19 15:42:09', 1),
+(15, 1, 1, NULL, '2019-11-19 15:53:11', 1),
+(16, 12, 1, NULL, '2019-11-19 16:02:10', 1),
+(17, 12, 1, NULL, '2019-11-19 16:42:32', 2);
 
 -- --------------------------------------------------------
 
@@ -558,6 +580,81 @@ INSERT INTO `tb_bloco` (`id_bloco`, `descricao_bloco`) VALUES
 (4, 'Bloco-D'),
 (5, 'Bloco-E'),
 (6, 'Bloco-F');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_entrada_produto`
+--
+
+CREATE TABLE `tb_entrada_produto` (
+  `id_entrada_produto` int(11) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `id_tp_entrada_produto` int(11) NOT NULL,
+  `nf_fiscal` varchar(50) DEFAULT NULL,
+  `dt_entrada` datetime DEFAULT current_timestamp(),
+  `id_status_mov_produto` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_entrada_produto`
+--
+
+INSERT INTO `tb_entrada_produto` (`id_entrada_produto`, `id_usuario`, `id_tp_entrada_produto`, `nf_fiscal`, `dt_entrada`, `id_status_mov_produto`) VALUES
+(1, 1, 1, '1234', '2019-11-07 00:00:00', NULL),
+(2, 1, 1, '123', '2019-11-07 00:00:00', NULL),
+(3, 1, 1, '3363', '2019-11-06 19:55:38', NULL),
+(5, 1, 1, '5596', '2019-11-06 20:02:11', NULL),
+(6, 1, 1, '5523', '2019-11-06 20:03:20', NULL),
+(7, 1, 1, '5523', '2019-11-06 20:03:35', NULL),
+(8, 1, 1, '9958', '2019-11-06 20:10:21', NULL),
+(9, 1, 1, '183', '2019-11-06 20:12:24', NULL),
+(10, 1, 2, '12123', '2019-11-06 20:13:38', NULL),
+(11, 1, 2, '12123', '2019-11-06 20:14:51', NULL),
+(12, 1, 1, '888', '2019-11-06 20:17:37', NULL),
+(13, 1, 1, '888', '2019-11-06 20:18:24', NULL),
+(14, 1, 1, '89898', '2019-11-06 20:18:30', NULL),
+(15, 1, 1, '747', '2019-11-06 20:18:52', NULL),
+(16, 1, 1, '1111', '2019-11-06 20:20:51', NULL),
+(17, 1, 1, '8520', '2019-11-06 20:21:17', NULL),
+(18, 1, 1, '8520', '2019-11-06 20:21:56', NULL),
+(19, 1, 1, '85858585', '2019-11-06 20:22:05', NULL),
+(20, 1, 1, '85858585', '2019-11-06 20:22:23', NULL),
+(21, 1, 1, '12312312312', '2019-11-06 20:24:11', NULL),
+(22, 1, 1, '12312312312', '2019-11-06 20:25:28', NULL),
+(23, 1, 1, '2525236', '2019-11-06 20:26:13', NULL),
+(24, 1, 1, '8569', '2019-11-06 20:30:07', NULL),
+(25, 1, 1, '666', '2019-11-06 23:49:20', NULL),
+(26, 1, 1, '665', '2019-11-06 23:50:10', NULL),
+(27, 1, 1, '852', '2019-11-06 23:59:35', NULL),
+(28, 1, 1, '12312312312', '2019-11-07 00:04:34', NULL),
+(29, 1, 1, '4433', '2019-11-07 00:07:16', NULL),
+(30, 1, 1, '111111', '2019-11-07 00:09:29', NULL),
+(31, 1, 1, '5545', '2019-11-07 00:16:57', NULL),
+(32, 1, 1, '2333232', '2019-11-07 00:18:53', NULL),
+(33, 1, 1, '6666', '2019-11-07 00:19:56', NULL),
+(34, 1, 1, '554656', '2019-11-07 00:33:22', NULL),
+(35, 1, 1, '23232', '2019-11-07 02:18:29', NULL),
+(36, 1, 1, '123', '2019-11-07 03:38:55', NULL),
+(37, 1, 2, '444444', '2019-11-07 03:43:42', NULL),
+(38, 1, 1, '6598', '2019-11-07 04:45:06', NULL),
+(39, 1, 2, '2323', '2019-11-07 05:16:58', NULL),
+(40, 1, 1, '45455', '2019-11-11 22:21:18', NULL),
+(41, 1, 1, '5999', '2019-11-13 04:54:17', NULL),
+(42, 1, 2, '2323', '2019-11-13 05:40:44', NULL),
+(43, 1, 1, '0000', '2019-11-13 05:56:05', NULL),
+(44, 1, 1, '0000', '2019-11-13 05:57:21', NULL),
+(45, 1, 2, '0000', '2019-11-13 06:01:46', NULL),
+(46, 1, 2, '0000', '2019-11-13 06:02:43', NULL),
+(47, 1, 1, '0000', '2019-11-14 05:24:12', NULL),
+(48, 1, 1, '0000', '2019-11-14 05:32:49', NULL),
+(49, 1, 2, '8888', '2019-11-15 21:46:04', NULL),
+(50, 1, 2, '8888', '2019-11-16 18:15:17', 2),
+(51, 1, 2, '8888', '2019-11-16 18:21:27', NULL),
+(52, 1, 2, '8888', '2019-11-16 18:22:46', NULL),
+(53, 1, 1, '8888', '2019-11-16 18:27:53', 1),
+(54, 1, 2, '2323', '2019-11-17 09:27:01', NULL),
+(55, 1, 2, '5999', '2019-11-17 09:35:32', 2);
 
 -- --------------------------------------------------------
 
@@ -624,11 +721,11 @@ CREATE TABLE `tb_funcionario` (
 
 INSERT INTO `tb_funcionario` (`id_funcionario`, `cpf`, `nome`, `rg`, `turno`, `sexo`, `telefone`, `id_status`, `dt_cadastro`, `dt_nascimento`, `id_funcao`) VALUES
 (1, '02923154142', 'Samoel lopes costa', 5002095, 'diurno', 'masculino', '62 99156-8478', 1, '2019-09-16 00:00:00', '1990-07-15', 1),
-(2, '00500600821', 'Nivaldo Henrique', 1010101, 'noturno', 'Indefinido', NULL, 1, '2019-09-16 00:00:00', '0000-00-00', 2),
+(2, '00500600821', 'Nivaldo Henrique', 1010101, 'noturno', 'Indefinido', '62 99922336', 1, '2019-09-16 00:00:00', '0000-00-00', 2),
 (4, '03030303030', 'matheus lopes ', 4444444, 'diurno', 'masculino', '44 4444-5565', 2, '2019-10-01 03:03:04', '2005-05-04', 3),
 (5, '74185296300', 'Edemarques lopes ', 22222222, 'diurno', 'masculino', '62 99775-5600', 1, '2019-10-04 02:19:35', '1988-04-22', 1),
 (11, '33333333333', 'Jonas silva juinior ', 55555, 'diurno', 'masculino', '62 99564-4433', 1, '2019-10-05 01:16:52', '2019-05-04', 2),
-(12, '03030303030', 'valeria almeida costa ', 50066464, 'noturno', 'feminino', '44 4444-5565', 1, '2019-10-12 06:36:54', '1991-06-21', 2);
+(12, '03030303030', 'valeria almeida costa ', 50066464, 'diurno', 'feminino', '44 4444-5565', 1, '2019-10-12 06:36:54', '1991-06-21', 2);
 
 -- --------------------------------------------------------
 
@@ -650,7 +747,7 @@ INSERT INTO `tb_img_funcionario` (`imagem`, `id_funcionario`) VALUES
 ('18d0e5b4a71eef92d2dadc5b10cbfb74jpg', 4),
 ('49c8635c62999eb2dc5a3e2d7eb1b6c8jpg', 5),
 ('7df71f5b9eba195dc092cc4111ba02d9jpg', 11),
-('2120712706caa69e28f18baddcccd22ejpg', 12);
+('8b2d86d51a9cda4bf54c2642f94cad94jpg', 12);
 
 -- --------------------------------------------------------
 
@@ -671,7 +768,81 @@ INSERT INTO `tb_img_morador` (`imagem`, `id_morador`) VALUES
 ('IMG_20181224_223451683.jpg', 1),
 ('3623818daba7b2a16b8437b086b06bd7jpg', 8),
 ('48ed4eefca56f0485ccd4d1dc9182065jpg', 9),
-('3b7ac03515b47235c7cfc0f146c5aef4jpg', 10);
+('3b7ac03515b47235c7cfc0f146c5aef4jpg', 10),
+('b859ff4063f6d83dce1860fcad241382jpg', 11),
+('9f18383fd978923be07e6d8907034db6png', 12);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_itens_baixa`
+--
+
+CREATE TABLE `tb_itens_baixa` (
+  `id_itens_baixa` int(11) NOT NULL,
+  `id_baixa_produto` int(11) DEFAULT NULL,
+  `id_produto` int(11) DEFAULT NULL,
+  `quantidade` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_itens_baixa`
+--
+
+INSERT INTO `tb_itens_baixa` (`id_itens_baixa`, `id_baixa_produto`, `id_produto`, `quantidade`) VALUES
+(2, 1, 2, 2),
+(7, 6, 1, 10),
+(8, 6, 2, 5),
+(10, 7, 2, 2),
+(11, 8, 1, 2),
+(12, 9, 1, 2),
+(13, 10, 1, 3),
+(14, 11, 2, 2),
+(15, 12, 2, 2),
+(16, 13, 1, 3),
+(17, 14, 2, 3),
+(18, 15, 1, 3),
+(19, 16, 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_itens_entrada`
+--
+
+CREATE TABLE `tb_itens_entrada` (
+  `id_itens_entrada` int(11) NOT NULL,
+  `id_entrada_produto` int(11) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  `quantidade` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_itens_entrada`
+--
+
+INSERT INTO `tb_itens_entrada` (`id_itens_entrada`, `id_entrada_produto`, `id_produto`, `quantidade`) VALUES
+(31, 24, 2, 3),
+(32, 26, 2, 3),
+(33, 26, 1, 3),
+(38, 29, 1, 2),
+(41, 30, 1, 2),
+(43, 31, 1, 1),
+(46, 32, 2, 1),
+(57, 34, 1, 2),
+(59, 38, 1, 10),
+(60, 38, 2, 500),
+(68, 43, 2, 3),
+(71, 45, 2, 1),
+(72, 45, 1, 2),
+(73, 48, 2, 2),
+(75, 49, 2, 2),
+(76, 49, 1, 2),
+(77, 50, 1, 3),
+(78, 51, 1, 2),
+(79, 52, 1, 2),
+(80, 53, 2, 3),
+(81, 55, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -689,10 +860,10 @@ CREATE TABLE `tb_morador` (
   `dt_nascimento` date DEFAULT NULL,
   `sexo` varchar(13) DEFAULT NULL,
   `dt_cadastro` datetime DEFAULT current_timestamp(),
-  `tipo_morador` varchar(11) DEFAULT NULL,
+  `id_tipo_morador` int(11) DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   `telefone` varchar(13) NOT NULL,
-  `id_apartamento` int(11) NOT NULL,
+  `id_apartamento` int(11) DEFAULT NULL,
   `id_status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -700,11 +871,13 @@ CREATE TABLE `tb_morador` (
 -- Extraindo dados da tabela `tb_morador`
 --
 
-INSERT INTO `tb_morador` (`id_morador`, `cpf`, `nome`, `nome_mae`, `nome_pai`, `rg`, `dt_nascimento`, `sexo`, `dt_cadastro`, `tipo_morador`, `id_usuario`, `telefone`, `id_apartamento`, `id_status`) VALUES
-(1, '02923154142', 'Samoel lopes costa ', 'Vilma luciende lopes costa ', 'Tomé da conceição costa', 5002095, '1990-07-15', 'masculino', '2019-10-05 05:38:06', 'Propietario', 1, '62 991568748', 12, 1),
-(8, '77777777777', 'valeria almeida costa ', 'Joaquina antunes', 'Osmar guedes ', 4444444, '1991-06-21', 'feminino', '2019-10-12 07:50:02', 'Propietario', 1, '44 4444-5565', 177, 1),
-(9, '85274196301', 'Edemarques lopes ', 'Neusi lopes', 'raimundo lopes', 22222222, '1988-04-26', 'masculino', '2019-10-19 23:51:48', 'Propietario', 1, '62 99775-5600', 257, 1),
-(10, '03030303030', 'isabela costa', 'Maria valeria almeida guedes ', 'samoel lopes costa', 55555, '2013-07-03', 'feminino', '2019-10-19 23:58:28', 'Propietario', 1, '929919556', 161, 1);
+INSERT INTO `tb_morador` (`id_morador`, `cpf`, `nome`, `nome_mae`, `nome_pai`, `rg`, `dt_nascimento`, `sexo`, `dt_cadastro`, `id_tipo_morador`, `id_usuario`, `telefone`, `id_apartamento`, `id_status`) VALUES
+(1, '02923154142', 'Samoel lopes costa ', 'Vilma luciende lopes costa ', 'Tome da conceiÃ§Ã£o costa', 5002095, '1990-07-15', 'masculino', '2019-10-05 05:38:06', 1, 1, '62 991568748', 12, 1),
+(8, '02523126141', 'Maria Valeria almeida costa ', 'Joaquina antunes', 'Osmar antunes guedes ', 4512312, '1991-06-21', 'feminino', '2019-10-12 07:50:02', 2, 1, '44 4444-5565', 337, 1),
+(9, '85274196301', 'Edemarques lopes ', 'Neusi lopes', 'raimundo lopes', 22222222, '1988-04-26', 'masculino', '2019-10-19 23:51:48', 1, 1, '62 99775-5600', 257, 1),
+(10, '03030303030', 'isabela costa', 'Maria valeria almeida guedes ', 'samoel lopes costa', 55555, '2013-07-03', 'feminino', '2019-10-19 23:58:28', 2, 1, '929919556', 161, 1),
+(11, '74185296300', 'Sidnei lopes costa', 'Vilma luciene lopes costa', 'tome da conceiÃ§Ã£o costa', 22222222, '1992-02-15', 'masculino', '2019-10-26 09:15:59', 1, 1, '44 4444-5565', 322, 2),
+(12, '03660125522', 'Daniel Gomes Albernaz', 'Solange', 'Gilmar', 123123, '2020-01-01', 'feminino', '2019-11-06 19:02:48', 1, 1, '629583695', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -764,7 +937,42 @@ INSERT INTO `tb_mov_morador` (`id_movimentacao`, `id_morador`, `id_usuario`, `dt
 (38, 9, 2, '2019-10-20 01:08:13', 2),
 (39, 1, 2, '2019-10-20 01:16:21', 2),
 (40, 8, 1, '2019-10-20 18:32:10', 2),
-(41, 1, 1, '2019-10-20 18:32:16', 1);
+(41, 1, 1, '2019-10-20 18:32:16', 1),
+(42, 8, 1, '2019-10-24 10:09:50', 1),
+(43, 8, 1, '2019-10-25 14:11:10', 2),
+(44, 8, 1, '2019-10-25 14:11:33', 1),
+(45, 8, 1, '2019-10-26 08:55:15', 2),
+(46, 8, 1, '2019-10-26 08:55:22', 1),
+(47, 11, 1, '2019-10-26 09:17:07', 2),
+(48, 11, 1, '2019-10-26 09:17:14', 1),
+(49, 11, 1, '2019-10-26 09:17:23', 2),
+(50, 9, 1, '2019-10-26 09:23:48', 1),
+(51, 11, 1, '2019-10-26 09:24:04', 1),
+(52, 9, 1, '2019-10-26 09:24:25', 2),
+(53, 1, 1, '2019-10-26 09:53:07', 2),
+(54, 8, 1, '2019-10-26 09:53:20', 2),
+(55, 8, 1, '2019-10-26 09:54:22', 1),
+(56, 1, 1, '2019-10-26 09:54:30', 1),
+(57, 9, 1, '2019-10-26 09:54:35', 1),
+(58, 8, 1, '2019-10-26 11:04:32', 2),
+(59, 9, 1, '2019-10-26 11:05:09', 2),
+(60, 8, 1, '2019-10-26 17:28:16', 1),
+(61, 1, 1, '2019-10-26 17:28:28', 2),
+(62, 8, 1, '2019-10-27 20:29:19', 2),
+(63, 8, 1, '2019-10-30 01:43:54', 1),
+(64, 9, 1, '2019-10-30 01:44:12', 1),
+(65, 1, 1, '2019-10-30 01:44:20', 1),
+(66, 8, 1, '2019-11-02 16:31:02', 2),
+(67, 1, 1, '2019-11-02 16:36:13', 2),
+(68, 8, 1, '2019-11-02 16:42:08', 1),
+(69, 1, 1, '2019-11-02 16:42:13', 1),
+(70, 8, 1, '2019-11-02 17:54:03', 2),
+(71, 1, 1, '2019-11-02 17:54:08', 2),
+(72, 1, 1, '2019-11-09 08:00:35', 1),
+(73, 1, 1, '2019-11-09 08:09:20', 2),
+(74, 1, 1, '2019-11-09 08:09:28', 1),
+(75, 1, 1, '2019-11-09 08:09:35', 2),
+(76, 1, 1, '2019-11-18 19:48:09', 1);
 
 -- --------------------------------------------------------
 
@@ -797,10 +1005,20 @@ CREATE TABLE `tb_produto` (
   `quantidade` int(11) DEFAULT NULL,
   `observacao` text DEFAULT NULL,
   `dt_cadastro` date DEFAULT curdate(),
-  `id_tp_entrada_produto` int(11) DEFAULT NULL,
   `id_tipo_produto` int(11) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL
+  `id_usuario` int(11) DEFAULT NULL,
+  `preco_produto` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_produto`
+--
+
+INSERT INTO `tb_produto` (`id_produto`, `descricao`, `quantidade`, `observacao`, `dt_cadastro`, `id_tipo_produto`, `id_usuario`, `preco_produto`) VALUES
+(1, 'Papel higienico', 0, 'Para coco', '2019-11-06', 1, 1, '2.50'),
+(2, 'Sabao', 5, 'De coco', '2019-11-06', 1, 1, '3.50'),
+(3, 'Amaciante ', 5, 'produto para limpeza 0000', '2019-11-07', 1, 1, '12.00'),
+(4, 'Bule de  Cafe ', NULL, 'Bule azul', '2019-11-19', 4, 1, '6.50');
 
 -- --------------------------------------------------------
 
@@ -825,7 +1043,10 @@ CREATE TABLE `tb_reserva` (
 
 INSERT INTO `tb_reserva` (`id_reserva`, `dt_reserva`, `id_espaco`, `id_morador`, `id_usuario`, `evento`, `id_bloco`, `id_status_reserva`) VALUES
 (1, '2019-10-10', 1, 1, 1, 'torta ', 2, 1),
-(2, '2019-10-21', 2, 8, 1, 'aniversario', 3, 2);
+(2, '2019-10-21', 2, 8, 1, 'aniversario', 3, 1),
+(4, '2019-10-25', 1, 9, 1, 'festa', 4, 1),
+(5, '2019-10-25', 2, 8, 1, 'aniversario', 4, 1),
+(6, '2019-10-27', 1, 9, 1, 'torta ', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -844,7 +1065,26 @@ CREATE TABLE `tb_status` (
 
 INSERT INTO `tb_status` (`id_status`, `status`) VALUES
 (1, 'Ativo'),
-(2, 'inativo');
+(2, 'Inativo');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_status_mov_produto`
+--
+
+CREATE TABLE `tb_status_mov_produto` (
+  `id_status_mov_produto` int(11) NOT NULL,
+  `status` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_status_mov_produto`
+--
+
+INSERT INTO `tb_status_mov_produto` (`id_status_mov_produto`, `status`) VALUES
+(1, 'FINALIZADO'),
+(2, 'CANCELADO');
 
 -- --------------------------------------------------------
 
@@ -854,16 +1094,35 @@ INSERT INTO `tb_status` (`id_status`, `status`) VALUES
 
 CREATE TABLE `tb_status_reserva` (
   `id_status_reserva` int(11) NOT NULL,
-  `Status_reserva` varchar(50) DEFAULT NULL
+  `status_reserva` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `tb_status_reserva`
 --
 
-INSERT INTO `tb_status_reserva` (`id_status_reserva`, `Status_reserva`) VALUES
+INSERT INTO `tb_status_reserva` (`id_status_reserva`, `status_reserva`) VALUES
 (1, 'ATIVA'),
 (2, 'CANCELADA');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_tipo_morador`
+--
+
+CREATE TABLE `tb_tipo_morador` (
+  `id_tipo_morador` int(11) NOT NULL,
+  `tipo_morador` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_tipo_morador`
+--
+
+INSERT INTO `tb_tipo_morador` (`id_tipo_morador`, `tipo_morador`) VALUES
+(1, 'PROPRIETARIO'),
+(2, 'LOCATARIO');
 
 -- --------------------------------------------------------
 
@@ -883,7 +1142,7 @@ CREATE TABLE `tb_tipo_produto` (
 INSERT INTO `tb_tipo_produto` (`id_tipo_produto`, `tipo_produto`) VALUES
 (1, 'LIMPEZA'),
 (2, 'FERRAMENTAS'),
-(3, 'ALIMENTAÇÃO'),
+(3, 'ALIMENTACAO'),
 (4, 'UTENSILIOS');
 
 -- --------------------------------------------------------
@@ -894,9 +1153,65 @@ INSERT INTO `tb_tipo_produto` (`id_tipo_produto`, `tipo_produto`) VALUES
 
 CREATE TABLE `tb_tipo_visita` (
   `id_tipo_visita` int(11) NOT NULL,
-  `id_visitante` int(11) DEFAULT NULL,
   `tipo_visita` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_tipo_visita`
+--
+
+INSERT INTO `tb_tipo_visita` (`id_tipo_visita`, `tipo_visita`) VALUES
+(1, 'VISITA'),
+(2, 'PRESTADOR DE SERVICO');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_total_entrada`
+--
+
+CREATE TABLE `tb_total_entrada` (
+  `id_total_entrada` int(11) NOT NULL,
+  `id_entrada_produto` int(11) NOT NULL,
+  `total_entrada` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_total_entrada`
+--
+
+INSERT INTO `tb_total_entrada` (`id_total_entrada`, `id_entrada_produto`, `total_entrada`) VALUES
+(1, 24, '10.50'),
+(2, 24, '10.50'),
+(3, 24, '10.50'),
+(4, 25, '0.00'),
+(5, 26, '7.50'),
+(6, 27, '12.00'),
+(9, 30, '0.00'),
+(10, 31, '6.00'),
+(11, 32, '31.00'),
+(12, 33, '-25.00'),
+(13, 34, '5.00'),
+(14, 35, '0.00'),
+(15, 2, '0.00'),
+(16, 37, '0.00'),
+(17, 38, '1775.00'),
+(18, 39, '-1487.50'),
+(19, 40, '0.00'),
+(20, 41, '-12.00'),
+(21, 39, '-1487.50'),
+(22, 43, '10.50'),
+(23, 43, '10.50'),
+(24, 45, '8.50'),
+(25, 45, '0.00'),
+(26, 48, '-1358.00'),
+(27, 49, '12.00'),
+(28, 50, '7.50'),
+(29, 51, '5.00'),
+(30, 52, '5.00'),
+(31, 53, '10.50'),
+(32, 54, '0.00'),
+(33, 55, '5.00');
 
 -- --------------------------------------------------------
 
@@ -934,7 +1249,7 @@ CREATE TABLE `tb_tp_movimentacao` (
 
 INSERT INTO `tb_tp_movimentacao` (`id_tp_movimentacao`, `movimentacao`) VALUES
 (1, 'ENTRADA'),
-(2, 'SAÍDA');
+(2, 'SAIDA');
 
 -- --------------------------------------------------------
 
@@ -956,7 +1271,7 @@ CREATE TABLE `tb_usuario` (
 --
 
 INSERT INTO `tb_usuario` (`id_usuario`, `senha`, `usuario`, `id_nivel_acesso`, `id_funcionario`, `id_status`) VALUES
-(1, '1234', 'samoel', 2, 1, 1),
+(1, '12345', 'samoel', 2, 1, 1),
 (2, '12345', 'nivaldo', 1, 2, 1);
 
 -- --------------------------------------------------------
@@ -968,7 +1283,7 @@ INSERT INTO `tb_usuario` (`id_usuario`, `senha`, `usuario`, `id_nivel_acesso`, `
 CREATE TABLE `tb_veiculo` (
   `id_veiculo` int(11) NOT NULL,
   `id_morador` int(11) DEFAULT NULL,
-  `placa` varchar(9) NOT NULL,
+  `placa` varchar(10) DEFAULT NULL,
   `descricao_veiculo` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -977,9 +1292,9 @@ CREATE TABLE `tb_veiculo` (
 --
 
 INSERT INTO `tb_veiculo` (`id_veiculo`, `id_morador`, `placa`, `descricao_veiculo`) VALUES
-(1, 8, 'kgx1120', 'Gol G5 vermelho'),
+(1, 8, 'kEW8885', 'Gol G5 Preto'),
 (2, 9, 'kwm9991', 'Polo preto '),
-(3, 10, '', '');
+(4, 11, 'kwm8884', 'Gol G5 Preto');
 
 -- --------------------------------------------------------
 
@@ -992,11 +1307,22 @@ CREATE TABLE `tb_visitante` (
   `nome` varchar(100) NOT NULL,
   `cpf` varchar(11) DEFAULT NULL,
   `rg` int(11) DEFAULT NULL,
-  `telefone` varchar(9) DEFAULT NULL,
-  `acompanhantes` text DEFAULT NULL,
+  `dt_nascimento` date NOT NULL,
+  `telefone` varchar(13) DEFAULT NULL,
+  `sexo` varchar(45) NOT NULL,
+  `observacao` text DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL,
-  `id_status` int(11) DEFAULT NULL
+  `id_status` int(11) DEFAULT NULL,
+  `id_tipo_visita` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_visitante`
+--
+
+INSERT INTO `tb_visitante` (`id_visitante`, `nome`, `cpf`, `rg`, `dt_nascimento`, `telefone`, `sexo`, `observacao`, `id_usuario`, `id_status`, `id_tipo_visita`) VALUES
+(3, 'Edemarques lopes ', '16161364446', 55555, '1990-01-21', '62 99564', 'masculino', 'ENTROU ACOMPANHADO DE :\r\nFULANO UM E FULANO DOIS \r\n', 1, 1, 1),
+(4, 'Samoel lopes costa', '02923154142', 2147483647, '1990-07-15', '62 99156-8478', 'masculino', 'ira passa a noite  no condominio ', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1008,9 +1334,29 @@ CREATE TABLE `tb_visita_morador` (
   `id_visita_morador` int(11) NOT NULL,
   `id_morador` int(11) DEFAULT NULL,
   `id_visitante` int(11) DEFAULT NULL,
+  `id_usuario` int(11) NOT NULL,
   `dt_movimentacao` datetime NOT NULL DEFAULT current_timestamp(),
   `id_tp_movimentacao` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tb_visita_morador`
+--
+
+INSERT INTO `tb_visita_morador` (`id_visita_morador`, `id_morador`, `id_visitante`, `id_usuario`, `dt_movimentacao`, `id_tp_movimentacao`) VALUES
+(1, 8, 4, 1, '2019-10-23 01:53:07', 1),
+(7, 8, 4, 1, '2019-11-03 08:28:53', 2),
+(8, 8, 4, 1, '2019-11-03 08:29:13', 1),
+(9, 8, 4, 1, '2019-11-03 08:29:57', 2),
+(10, 8, 4, 1, '2019-11-03 08:39:08', 1),
+(11, 8, 4, 1, '2019-11-03 08:39:26', 2),
+(12, 8, 4, 1, '2019-11-03 08:59:23', 1),
+(13, 8, 4, 1, '2019-11-03 09:00:29', 1),
+(14, 8, 4, 1, '2019-11-03 09:02:37', 1),
+(15, 8, 4, 1, '2019-11-03 16:09:27', 2),
+(18, 1, 4, 1, '2019-11-07 05:33:30', 1),
+(19, 1, 4, 1, '2019-11-19 17:41:35', 2),
+(20, 1, 4, 1, '2019-11-19 17:41:46', 1);
 
 --
 -- Índices para tabelas despejadas
@@ -1029,14 +1375,23 @@ ALTER TABLE `tb_apartamento`
 ALTER TABLE `tb_baixa_produto`
   ADD PRIMARY KEY (`id_baixa_produto`),
   ADD KEY `id_funcionario` (`id_funcionario`),
-  ADD KEY `id_produto` (`id_produto`),
-  ADD KEY `id_usuario` (`id_usuario`);
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_status_mov_produto` (`id_status_mov_produto`);
 
 --
 -- Índices para tabela `tb_bloco`
 --
 ALTER TABLE `tb_bloco`
   ADD PRIMARY KEY (`id_bloco`);
+
+--
+-- Índices para tabela `tb_entrada_produto`
+--
+ALTER TABLE `tb_entrada_produto`
+  ADD PRIMARY KEY (`id_entrada_produto`),
+  ADD KEY `id_tp_entrada_produto` (`id_tp_entrada_produto`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_status_mov_produto` (`id_status_mov_produto`);
 
 --
 -- Índices para tabela `tb_espacos`
@@ -1072,13 +1427,30 @@ ALTER TABLE `tb_img_morador`
   ADD KEY `id_morador` (`id_morador`);
 
 --
+-- Índices para tabela `tb_itens_baixa`
+--
+ALTER TABLE `tb_itens_baixa`
+  ADD PRIMARY KEY (`id_itens_baixa`),
+  ADD KEY `id_baixa_produto` (`id_baixa_produto`),
+  ADD KEY `id_produto` (`id_produto`);
+
+--
+-- Índices para tabela `tb_itens_entrada`
+--
+ALTER TABLE `tb_itens_entrada`
+  ADD PRIMARY KEY (`id_itens_entrada`),
+  ADD KEY `id_entrada_produto` (`id_entrada_produto`),
+  ADD KEY `id_produto` (`id_produto`);
+
+--
 -- Índices para tabela `tb_morador`
 --
 ALTER TABLE `tb_morador`
   ADD PRIMARY KEY (`id_morador`),
   ADD KEY `id_usuario` (`id_usuario`),
   ADD KEY `id_status` (`id_status`),
-  ADD KEY `id_apartamento` (`id_apartamento`);
+  ADD KEY `id_apartamento` (`id_apartamento`),
+  ADD KEY `id_tipo_morador` (`id_tipo_morador`);
 
 --
 -- Índices para tabela `tb_mov_morador`
@@ -1101,8 +1473,7 @@ ALTER TABLE `tb_nivel_acesso`
 ALTER TABLE `tb_produto`
   ADD PRIMARY KEY (`id_produto`),
   ADD KEY `id_tipo_produto` (`id_tipo_produto`),
-  ADD KEY `id_usuario` (`id_usuario`),
-  ADD KEY `id_tp_entrada_produto` (`id_tp_entrada_produto`);
+  ADD KEY `id_usuario` (`id_usuario`);
 
 --
 -- Índices para tabela `tb_reserva`
@@ -1122,10 +1493,22 @@ ALTER TABLE `tb_status`
   ADD PRIMARY KEY (`id_status`);
 
 --
+-- Índices para tabela `tb_status_mov_produto`
+--
+ALTER TABLE `tb_status_mov_produto`
+  ADD PRIMARY KEY (`id_status_mov_produto`);
+
+--
 -- Índices para tabela `tb_status_reserva`
 --
 ALTER TABLE `tb_status_reserva`
   ADD PRIMARY KEY (`id_status_reserva`);
+
+--
+-- Índices para tabela `tb_tipo_morador`
+--
+ALTER TABLE `tb_tipo_morador`
+  ADD PRIMARY KEY (`id_tipo_morador`);
 
 --
 -- Índices para tabela `tb_tipo_produto`
@@ -1137,8 +1520,14 @@ ALTER TABLE `tb_tipo_produto`
 -- Índices para tabela `tb_tipo_visita`
 --
 ALTER TABLE `tb_tipo_visita`
-  ADD PRIMARY KEY (`id_tipo_visita`),
-  ADD KEY `id_visitante` (`id_visitante`);
+  ADD PRIMARY KEY (`id_tipo_visita`);
+
+--
+-- Índices para tabela `tb_total_entrada`
+--
+ALTER TABLE `tb_total_entrada`
+  ADD PRIMARY KEY (`id_total_entrada`),
+  ADD KEY `id_entrada_produto` (`id_entrada_produto`);
 
 --
 -- Índices para tabela `tb_tp_entrada_produto`
@@ -1174,7 +1563,8 @@ ALTER TABLE `tb_veiculo`
 ALTER TABLE `tb_visitante`
   ADD PRIMARY KEY (`id_visitante`),
   ADD KEY `id_usuario` (`id_usuario`),
-  ADD KEY `id_status` (`id_status`);
+  ADD KEY `id_status` (`id_status`),
+  ADD KEY `id_tipo_visita` (`id_tipo_visita`);
 
 --
 -- Índices para tabela `tb_visita_morador`
@@ -1183,7 +1573,8 @@ ALTER TABLE `tb_visita_morador`
   ADD PRIMARY KEY (`id_visita_morador`),
   ADD KEY `id_morador` (`id_morador`),
   ADD KEY `id_visitante` (`id_visitante`),
-  ADD KEY `id_tp_movimentacao` (`id_tp_movimentacao`);
+  ADD KEY `id_tp_movimentacao` (`id_tp_movimentacao`),
+  ADD KEY `id_usuario` (`id_usuario`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -1199,13 +1590,19 @@ ALTER TABLE `tb_apartamento`
 -- AUTO_INCREMENT de tabela `tb_baixa_produto`
 --
 ALTER TABLE `tb_baixa_produto`
-  MODIFY `id_baixa_produto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_baixa_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `tb_bloco`
 --
 ALTER TABLE `tb_bloco`
   MODIFY `id_bloco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de tabela `tb_entrada_produto`
+--
+ALTER TABLE `tb_entrada_produto`
+  MODIFY `id_entrada_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de tabela `tb_espacos`
@@ -1226,34 +1623,58 @@ ALTER TABLE `tb_funcionario`
   MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT de tabela `tb_itens_baixa`
+--
+ALTER TABLE `tb_itens_baixa`
+  MODIFY `id_itens_baixa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de tabela `tb_itens_entrada`
+--
+ALTER TABLE `tb_itens_entrada`
+  MODIFY `id_itens_entrada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+
+--
 -- AUTO_INCREMENT de tabela `tb_morador`
 --
 ALTER TABLE `tb_morador`
-  MODIFY `id_morador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_morador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `tb_mov_morador`
 --
 ALTER TABLE `tb_mov_morador`
-  MODIFY `id_movimentacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_movimentacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT de tabela `tb_produto`
 --
 ALTER TABLE `tb_produto`
-  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `tb_reserva`
 --
 ALTER TABLE `tb_reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de tabela `tb_status_mov_produto`
+--
+ALTER TABLE `tb_status_mov_produto`
+  MODIFY `id_status_mov_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tb_status_reserva`
 --
 ALTER TABLE `tb_status_reserva`
   MODIFY `id_status_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `tb_tipo_morador`
+--
+ALTER TABLE `tb_tipo_morador`
+  MODIFY `id_tipo_morador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tb_tipo_produto`
@@ -1265,7 +1686,13 @@ ALTER TABLE `tb_tipo_produto`
 -- AUTO_INCREMENT de tabela `tb_tipo_visita`
 --
 ALTER TABLE `tb_tipo_visita`
-  MODIFY `id_tipo_visita` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tipo_visita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `tb_total_entrada`
+--
+ALTER TABLE `tb_total_entrada`
+  MODIFY `id_total_entrada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de tabela `tb_tp_entrada_produto`
@@ -1289,19 +1716,19 @@ ALTER TABLE `tb_usuario`
 -- AUTO_INCREMENT de tabela `tb_veiculo`
 --
 ALTER TABLE `tb_veiculo`
-  MODIFY `id_veiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_veiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `tb_visitante`
 --
 ALTER TABLE `tb_visitante`
-  MODIFY `id_visitante` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_visitante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `tb_visita_morador`
 --
 ALTER TABLE `tb_visita_morador`
-  MODIFY `id_visita_morador` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_visita_morador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restrições para despejos de tabelas
@@ -1318,8 +1745,16 @@ ALTER TABLE `tb_apartamento`
 --
 ALTER TABLE `tb_baixa_produto`
   ADD CONSTRAINT `tb_baixa_produto_ibfk_1` FOREIGN KEY (`id_funcionario`) REFERENCES `tb_funcionario` (`id_funcionario`),
-  ADD CONSTRAINT `tb_baixa_produto_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `tb_produto` (`id_produto`),
-  ADD CONSTRAINT `tb_baixa_produto_ibfk_3` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`);
+  ADD CONSTRAINT `tb_baixa_produto_ibfk_3` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`),
+  ADD CONSTRAINT `tb_baixa_produto_ibfk_4` FOREIGN KEY (`id_status_mov_produto`) REFERENCES `tb_status_mov_produto` (`id_status_mov_produto`);
+
+--
+-- Limitadores para a tabela `tb_entrada_produto`
+--
+ALTER TABLE `tb_entrada_produto`
+  ADD CONSTRAINT `tb_entrada_produto_ibfk_2` FOREIGN KEY (`id_tp_entrada_produto`) REFERENCES `tb_tp_entrada_produto` (`id_tp_entrada_produto`),
+  ADD CONSTRAINT `tb_entrada_produto_ibfk_3` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`),
+  ADD CONSTRAINT `tb_entrada_produto_ibfk_4` FOREIGN KEY (`id_status_mov_produto`) REFERENCES `tb_status_mov_produto` (`id_status_mov_produto`);
 
 --
 -- Limitadores para a tabela `tb_img_funcionario`
@@ -1335,12 +1770,27 @@ ALTER TABLE `tb_img_morador`
   ADD CONSTRAINT `tb_img_morador_ibfk_1` FOREIGN KEY (`id_morador`) REFERENCES `tb_morador` (`id_morador`);
 
 --
+-- Limitadores para a tabela `tb_itens_baixa`
+--
+ALTER TABLE `tb_itens_baixa`
+  ADD CONSTRAINT `tb_itens_baixa_ibfk_1` FOREIGN KEY (`id_baixa_produto`) REFERENCES `tb_baixa_produto` (`id_baixa_produto`),
+  ADD CONSTRAINT `tb_itens_baixa_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `tb_produto` (`id_produto`);
+
+--
+-- Limitadores para a tabela `tb_itens_entrada`
+--
+ALTER TABLE `tb_itens_entrada`
+  ADD CONSTRAINT `tb_itens_entrada_ibfk_1` FOREIGN KEY (`id_entrada_produto`) REFERENCES `tb_entrada_produto` (`id_entrada_produto`),
+  ADD CONSTRAINT `tb_itens_entrada_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `tb_produto` (`id_produto`);
+
+--
 -- Limitadores para a tabela `tb_morador`
 --
 ALTER TABLE `tb_morador`
   ADD CONSTRAINT `tb_morador_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`),
   ADD CONSTRAINT `tb_morador_ibfk_2` FOREIGN KEY (`id_status`) REFERENCES `tb_status` (`id_status`),
-  ADD CONSTRAINT `tb_morador_ibfk_3` FOREIGN KEY (`id_apartamento`) REFERENCES `tb_apartamento` (`id_apartamento`);
+  ADD CONSTRAINT `tb_morador_ibfk_3` FOREIGN KEY (`id_apartamento`) REFERENCES `tb_apartamento` (`id_apartamento`),
+  ADD CONSTRAINT `tb_morador_ibfk_4` FOREIGN KEY (`id_tipo_morador`) REFERENCES `tb_tipo_morador` (`id_tipo_morador`);
 
 --
 -- Limitadores para a tabela `tb_mov_morador`
@@ -1355,8 +1805,7 @@ ALTER TABLE `tb_mov_morador`
 --
 ALTER TABLE `tb_produto`
   ADD CONSTRAINT `tb_produto_ibfk_2` FOREIGN KEY (`id_tipo_produto`) REFERENCES `tb_tipo_produto` (`id_tipo_produto`),
-  ADD CONSTRAINT `tb_produto_ibfk_3` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`),
-  ADD CONSTRAINT `tb_produto_ibfk_4` FOREIGN KEY (`id_tp_entrada_produto`) REFERENCES `tb_tp_entrada_produto` (`id_tp_entrada_produto`);
+  ADD CONSTRAINT `tb_produto_ibfk_3` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`);
 
 --
 -- Limitadores para a tabela `tb_reserva`
@@ -1369,10 +1818,10 @@ ALTER TABLE `tb_reserva`
   ADD CONSTRAINT `tb_reserva_ibfk_5` FOREIGN KEY (`id_status_reserva`) REFERENCES `tb_status_reserva` (`id_status_reserva`);
 
 --
--- Limitadores para a tabela `tb_tipo_visita`
+-- Limitadores para a tabela `tb_total_entrada`
 --
-ALTER TABLE `tb_tipo_visita`
-  ADD CONSTRAINT `tb_tipo_visita_ibfk_1` FOREIGN KEY (`id_visitante`) REFERENCES `tb_visitante` (`id_visitante`);
+ALTER TABLE `tb_total_entrada`
+  ADD CONSTRAINT `tb_total_entrada_ibfk_1` FOREIGN KEY (`id_entrada_produto`) REFERENCES `tb_entrada_produto` (`id_entrada_produto`);
 
 --
 -- Limitadores para a tabela `tb_usuario`
@@ -1391,7 +1840,8 @@ ALTER TABLE `tb_veiculo`
 --
 ALTER TABLE `tb_visitante`
   ADD CONSTRAINT `tb_visitante_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`),
-  ADD CONSTRAINT `tb_visitante_ibfk_2` FOREIGN KEY (`id_status`) REFERENCES `tb_status` (`id_status`);
+  ADD CONSTRAINT `tb_visitante_ibfk_2` FOREIGN KEY (`id_status`) REFERENCES `tb_status` (`id_status`),
+  ADD CONSTRAINT `tb_visitante_ibfk_3` FOREIGN KEY (`id_tipo_visita`) REFERENCES `tb_tipo_visita` (`id_tipo_visita`);
 
 --
 -- Limitadores para a tabela `tb_visita_morador`
@@ -1399,7 +1849,8 @@ ALTER TABLE `tb_visitante`
 ALTER TABLE `tb_visita_morador`
   ADD CONSTRAINT `tb_visita_morador_ibfk_1` FOREIGN KEY (`id_morador`) REFERENCES `tb_morador` (`id_morador`),
   ADD CONSTRAINT `tb_visita_morador_ibfk_2` FOREIGN KEY (`id_visitante`) REFERENCES `tb_visitante` (`id_visitante`),
-  ADD CONSTRAINT `tb_visita_morador_ibfk_3` FOREIGN KEY (`id_tp_movimentacao`) REFERENCES `tb_tp_movimentacao` (`id_tp_movimentacao`);
+  ADD CONSTRAINT `tb_visita_morador_ibfk_3` FOREIGN KEY (`id_tp_movimentacao`) REFERENCES `tb_tp_movimentacao` (`id_tp_movimentacao`),
+  ADD CONSTRAINT `tb_visita_morador_ibfk_4` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
